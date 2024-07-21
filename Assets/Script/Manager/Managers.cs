@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Manager : MonoBehaviour
+public class Managers : MonoBehaviour
 {
 
-    static Manager s_instance; // 유일함
-    public static Manager Instance { get {Init();  return s_instance; } } // 프로퍼티 사용
+    static Managers s_instance; // 유일함
+    static Managers Instance { get {Init();  return s_instance; } } // 프로퍼티 사용
     // Start is called before the first frame update
+
+    InputManager _input = new InputManager();
+    ResourceManager _resource = new ResourceManager();
+
+    public static InputManager Input { get { return Instance._input; } }
+    public static ResourceManager Resource { get { return Instance._resource; } }
+
     void Start()
     {
         Init();
@@ -16,7 +23,7 @@ public class Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        _input.OnUpdate();
     }
     static void Init()
     {
@@ -27,12 +34,12 @@ public class Manager : MonoBehaviour
             {
 
                 go = new GameObject { name = "Managers" };
-                go.AddComponent<Manager>();
+                go.AddComponent<Managers>();
             }   
 
                 DontDestroyOnLoad(go);
-                s_instance = go.GetComponent<Manager>();
-            
+                s_instance = go.GetComponent<Managers>();
+
         }
 
     }
