@@ -47,7 +47,7 @@ public class MessageGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //나중에 클래스 만들고 나서 위치 전부 바꿔야 함
+        //나중에 클래스 만들고 나서 전부 바꿔야 함
         persistentData = PersistentData.Instance;
         if (persistentData == null)
         {
@@ -59,17 +59,28 @@ public class MessageGenerator : MonoBehaviour
         Terror_location location = persistentData.current_location;
         List<Terror_methods> methods = persistentData.current_methods;
 
-        Authenticity[] authenticities = (Authenticity[])System.Enum.GetValues(typeof(Authenticity)); // create a list containing terror locations (테러 위치 리스트 생성)
-        real_authenticity = authenticities[Random.Range(0, authenticities.Length)];
-
-
-        SetRandomMessage();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Authenticity[] authenticities = (Authenticity[])System.Enum.GetValues(typeof(Authenticity));
+            real_authenticity = authenticities[Random.Range(0, authenticities.Length)];
+            Debug.Log($"authenticity: {real_authenticity}");
+            if (real_authenticity != Authenticity.breaking)
+            {
+                SetRandomMessage();
+            }
+            else
+            {
+                SetBreakingNews();
+            }
+            
+        }
+
     }
 
 
@@ -88,6 +99,7 @@ public class MessageGenerator : MonoBehaviour
         {
             FalseElements[] false_elts = (FalseElements[])System.Enum.GetValues(typeof(FalseElements));
             false_elt = false_elts[Random.Range(0, false_elts.Length)];
+            Debug.Log($"false element: {false_elt}");
         }
         
 
@@ -137,6 +149,7 @@ public class MessageGenerator : MonoBehaviour
         
 
         Debug.Log(printed_message);
+        
     }
     void SetRandomPicture()
     {
