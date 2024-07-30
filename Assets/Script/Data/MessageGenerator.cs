@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UIElements;
 
 public enum Authenticity
 {
@@ -173,23 +174,24 @@ public class MessageGenerator : MonoBehaviour
 
 
         // 문구 대충 틀만..
-        /**
+        
         string selected_message = news[Random.Range(0, news.Count)]; // 게시물 멘트 랜덤 선택
-        public string t_scale;
-        switch (current_scale)
-        {
-            case Terror_scale.small:
-                t_scale = "소";
-                break;
-            case Terror_scale.medium:
-                t_scale = "중";
-                break;
-            case Terror_scale.large:
-                t_scale = "대";
-                break;
-        }
-        string printed_message = string.Format(selected_message, t_scale); // 게시물 문구(참) 만들기
-        **/
+        //public string t_scale;
+        //switch (persistentData.current_scale)
+        //{
+        //    case Terror_scale.small:
+        //        t_scale = "소";
+        //        break;
+        //    case Terror_scale.medium:
+        //        t_scale = "중";
+        //        break;
+        //    case Terror_scale.large:
+        //        t_scale = "대";
+        //        break;
+        //}
+        string printed_message = string.Format(selected_message, persistentData.current_scale); // 게시물 문구(참) 만들기
+        Debug.Log(printed_message);
+        
 
         // 그림은 SetRandomPicture 쓰면 됨
 

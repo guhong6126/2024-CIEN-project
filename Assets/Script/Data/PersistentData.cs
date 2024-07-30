@@ -10,16 +10,18 @@ using UnityEngine;
 
 public enum Terror_scale
 {
-    small, medium, large
+    소, 중, 대
+    //small, medium, large
 }
 public enum Terror_location
 {
-    east, west, south, north, city
+    동부, 서부, 남부, 북부, 특별자치구
+    //east, west, south, north, city
 }
 public enum Terror_methods
 {
-    // 인질극, 납치, 폭탄, 사이버, 바이오, 핵, 사보타주
-    hostage, kidnapping, bomb, cyber, bioterror, nuclear, sabotage
+    인질극, 납치, 폭탄테러, 사이버테러, 바이오테러, 핵공격, 사보타주
+    //hostage, kidnapping, bomb, cyber, bioterror, nuclear, sabotage
     // 대규모일 경우 게시물에 거짓으로 나타낼 방법을 추가해야 함 (테스트를 위해 임시로 sabotage 추가해둠)
 }
 
@@ -71,28 +73,48 @@ public class PersistentData : MonoBehaviour
     {
         current_methods = new List<Terror_methods>(); // 실행 가능한 테러 방법을 담을 리스트
 
+        //switch (current_scale) // 지금 규모가 뭐냐
+        //{
+        //    case Terror_scale.small:
+        //        current_methods.Add(Terror_methods.hostage);
+        //        current_methods.Add(Terror_methods.kidnapping);
+        //        break;
+        //    case Terror_scale.medium:
+        //        current_methods.Add(Terror_methods.hostage);
+        //        current_methods.Add(Terror_methods.kidnapping);
+        //        current_methods.Add(Terror_methods.bomb);
+        //        current_methods.Add(Terror_methods.cyber);
+        //        break;
+        //    case Terror_scale.large:
+        //        current_methods.Add(Terror_methods.hostage);
+        //        current_methods.Add(Terror_methods.kidnapping);
+        //        current_methods.Add(Terror_methods.bomb);
+        //        current_methods.Add(Terror_methods.cyber);
+        //        current_methods.Add(Terror_methods.bioterror);
+        //        current_methods.Add(Terror_methods.nuclear);
+        //        break;
+        //}
         switch (current_scale) // 지금 규모가 뭐냐
         {
-            case Terror_scale.small:
-                current_methods.Add(Terror_methods.hostage);
-                current_methods.Add(Terror_methods.kidnapping);
+            case Terror_scale.소:
+                current_methods.Add(Terror_methods.인질극);
+                current_methods.Add(Terror_methods.납치);
                 break;
-            case Terror_scale.medium:
-                current_methods.Add(Terror_methods.hostage);
-                current_methods.Add(Terror_methods.kidnapping);
-                current_methods.Add(Terror_methods.bomb);
-                current_methods.Add(Terror_methods.cyber);
+            case Terror_scale.중:
+                current_methods.Add(Terror_methods.인질극);
+                current_methods.Add(Terror_methods.납치);
+                current_methods.Add(Terror_methods.폭탄테러);
+                current_methods.Add(Terror_methods.사이버테러);
                 break;
-            case Terror_scale.large:
-                current_methods.Add(Terror_methods.hostage);
-                current_methods.Add(Terror_methods.kidnapping);
-                current_methods.Add(Terror_methods.bomb);
-                current_methods.Add(Terror_methods.cyber);
-                current_methods.Add(Terror_methods.bioterror);
-                current_methods.Add(Terror_methods.nuclear);
+            case Terror_scale.대:
+                current_methods.Add(Terror_methods.인질극);
+                current_methods.Add(Terror_methods.납치);
+                current_methods.Add(Terror_methods.폭탄테러);
+                current_methods.Add(Terror_methods.사이버테러);
+                current_methods.Add(Terror_methods.바이오테러);
+                current_methods.Add(Terror_methods.핵공격);
                 break;
         }
-
         /** can use if-statement instead of switch-statement like below (아래처럼 if문으로 작성도 가능)
             idk which one is more readable... (뭐가 더 가독성이 좋은지 모르겠음)
         **/
