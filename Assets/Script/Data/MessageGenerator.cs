@@ -21,8 +21,7 @@ public class MessageGenerator : MonoBehaviour
     public FalseElements false_elt;
     private PersistentData persistentData = PersistentData.Instance; //PersistentData 인스턴스에 접근하기
 
-    
-
+    public Terror_methods current_method;
 
 
     private List<string> messages = new List<string>
@@ -60,6 +59,7 @@ public class MessageGenerator : MonoBehaviour
         Terror_location location = persistentData.current_location;
         List<Terror_methods> methods = persistentData.current_methods;
 
+
     }
 
     // Update is called once per frame
@@ -84,7 +84,7 @@ public class MessageGenerator : MonoBehaviour
 
     }
 
-
+    
 
 
 
@@ -112,7 +112,7 @@ public class MessageGenerator : MonoBehaviour
 
         if (real_authenticity == Authenticity.true1 || (real_authenticity == Authenticity.false1 && false_elt== FalseElements.picture)) // 진위 여부가 참이거나 [진위여부는 거짓인데 그림이 거짓]인 경우
         {
-            Terror_methods current_method = persistentData.current_methods[Random.Range(0, persistentData.current_methods.Count)]; // 게시물에 담을 방법(참) 랜덤 선택
+            current_method = persistentData.current_methods[Random.Range(0, persistentData.current_methods.Count)]; // 게시물에 담을 방법(참) 랜덤 선택
             printed_message = string.Format(selected_message, persistentData.current_location, current_method); // 게시물 문구(참) 만들기
         }
         else {
@@ -152,18 +152,7 @@ public class MessageGenerator : MonoBehaviour
         Debug.Log(printed_message);
         
     }
-    void SetRandomPicture()
-    {
-        
-        // if (게시물==거짓 && 거짓항목==그림)
-        if (real_authenticity == Authenticity.false1 && false_elt == FalseElements.picture) {
-            //출력그림=(모래시계=0이거나 거짓 방법에 해당하는 그림 선택)
-        }
-        else{
-            //출력그림=(모래시계=1이고 참인 방법에 해당하는 그림 선택)
-        }
-        
-    }
+    
 
     void SetBreakingNews()
     {
@@ -171,11 +160,13 @@ public class MessageGenerator : MonoBehaviour
         // 그래서 여기서는 내용만 구성해주면 될듯
 
         // 언론사 랜덤 선택 구현하기
+        string pressname = presses[Random.Range(0, presses.Count)]; // 언론사명 랜덤 선택
 
 
         // 문구 대충 틀만..
-        
+
         string selected_message = news[Random.Range(0, news.Count)]; // 게시물 멘트 랜덤 선택
+        // 변수명 영어로 바꿔야 하면 아래 코드 쓰기
         //public string t_scale;
         //switch (persistentData.current_scale)
         //{
