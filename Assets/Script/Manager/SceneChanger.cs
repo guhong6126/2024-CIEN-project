@@ -7,7 +7,7 @@ public class ChangeScene : MonoBehaviour
 {
     public void ChangeSNS()
     {
-        SceneManager.LoadScene("SNS_Q");
+        SceneManager.LoadScene("SNS");
     }
 
     public void ChangeWhiteBoard()
