@@ -4,10 +4,12 @@ using UnityEditor.VersionControl;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
+
 
 public enum Authenticity
 {
-    true1, false1, breaking
+    true1, false1, 속보
 }
 
 public enum FalseElements
@@ -15,8 +17,40 @@ public enum FalseElements
     location, methods, picture
 }
 
+public class Posts
+{
+    /**담아야 할 속성: 
+     * real_authenticity(찐 참거짓)
+     * current_scale (속보일 경우)
+     * location: current_location or false_location
+     * method: current_method or false_method
+     * selectedSpriteInfo : isSandglass  --> 이거... 좀 더 고민해야 함 그림 관련 속성을 어떻게 넣을지 (그림 이름만? 문양 참거짓도? 방법까지?)
+     * FalseElements
+     * guess_authenticity(판단한 참거짓)
+     * isCorrect(게시물==진위여부면 정답 아니면 오답)
+     * postnum (게시글 번호)
+     * 
+     * 놓친 거 있나? 닉넴도 담아놔야 하나?...
+    **/
+    //public bool real_authenticity; 
+    //public bool isSandglass; // 모래시계 참/거짓 여부를 담는 속성
+    //public Terror_methods methodName; 
+
+    //public Posts(bool real_authenticity, bool isSandglass, Terror_methods methodName)
+    //{
+    //    this.real_authenticity = real_authenticity;
+    //    this.isSandglass = isSandglass;
+    //    this.methodName = methodName;
+    //}
+}
+
+
+
+
 public class MessageGenerator : MonoBehaviour
 {
+    private const string SceneLoadCountKey = "SceneLoadCount";
+
     public Authenticity real_authenticity;
     public FalseElements false_elt;
     private PersistentData persistentData = PersistentData.Instance; //PersistentData 인스턴스에 접근하기
@@ -47,6 +81,12 @@ public class MessageGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // 씬 로드 카운트 증가
+        int sceneLoadCount = PlayerPrefs.GetInt(SceneLoadCountKey, 0); // 초기화하는 함수도 만들어야 함
+        sceneLoadCount++;
+        PlayerPrefs.SetInt(SceneLoadCountKey, sceneLoadCount);
+
+
         //나중에 클래스 만들고 나서 전부 바꿔야 함
         persistentData = PersistentData.Instance;
         if (persistentData == null)
@@ -66,12 +106,12 @@ public class MessageGenerator : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P)) // 테스트용
         {
             Authenticity[] authenticities = (Authenticity[])System.Enum.GetValues(typeof(Authenticity));
             real_authenticity = authenticities[Random.Range(0, authenticities.Length)];
             Debug.Log($"authenticity: {real_authenticity}");
-            if (real_authenticity != Authenticity.breaking)
+            if (real_authenticity != Authenticity.속보)
             {
                 SetRandomMessage();
             }
@@ -82,13 +122,74 @@ public class MessageGenerator : MonoBehaviour
             
         }
 
+        // 스테이지마다 적용할 거
+        /**
+         * int (num_of_true, num_breaking) = SetAuthRatio(sceneLoadCount);
+         * AuthenticityRatio(num_of_true, num_breaking);
+         * foreach( elt in post_list) {
+         *      if (elt != Authenticity.속보){
+         *          SetRandomMessage();
+         *      }
+         *      else {
+         *          SetBreakingNews();
+         *      }
+         * }
+         * */
+
     }
 
-    
+
+    /// <summary>
+    /// 몇 번째 스테이지인지 체크해서 num_of_true랑 num_breaking 정하는 함수
+    /// </summary>
+    /// <param name="num"></param>
+    /// <returns>(참인 게시물 개수, 속보 순서)</returns>
+    private (int, int) SetAuthRatio(int num)
+    {
+        int n_true, n_brk;
+        n_true = num * 3; // 예시임 비율은 기획한테 물어보기
+        n_brk = 20 - num;
+        return (n_true, n_brk);
+    }
+
+    /// <summary>
+    /// 참인 게시물 개수랑 속보가 들어갈 위치를 받아 참,거짓,속보 순서 리스트를 만드는 함수
+    /// </summary>
+    /// <param name="num_of_true">19개 중 참인 게시물의 개수</param>
+    /// <param name="num_breaking">속보의 위치 (카운트는 1부터 시작)</param>
+    /// <returns>(참, 거짓, 속보) 순서 리스트</returns>
+    private List<Authenticity> AuthenticityRatio(int num_of_true, int num_breaking)
+    {
+        List<Authenticity>  posts_lists = new List<Authenticity>();
+
+        for(int i = 0; i < 19; i++) // 19개만 생성 (1개는 속보니까)
+        {
+            if( i <= num_of_true)
+            {
+                posts_lists.Add(Authenticity.true1);
+            }
+            else
+            {
+                posts_lists.Add(Authenticity.false1);
+            }
+        }
+        // list shuffle
+        System.Random rand = new System.Random();
+        List<Authenticity> posts_list = posts_lists.OrderBy(_ => rand.Next()).ToList();
+
+        posts_list.Add(Authenticity.속보);
+
+        //switch (num_breaking번째랑 속보랑 위치 바꾸기)
+        (posts_list[posts_list.Count - 1], posts_list[num_breaking-1]) = (posts_list[num_breaking-1], posts_list[posts_list.Count - 1]);
+        
+        return posts_list;
+    }
 
 
 
-
+    /// <summary>
+    /// 랜덤 게시물을 생성하는 함수 (지금은 Debug.Log로 출력하지만 UI에 출력되게 바꿔야 함)
+    /// </summary>
     void SetRandomMessage()
     {
         string printed_message = string.Empty; //출력할 메시지(아직은 empty)
@@ -153,7 +254,9 @@ public class MessageGenerator : MonoBehaviour
         
     }
     
-
+    /// <summary>
+    /// 속보 문구를 생성하는 함수
+    /// </summary>
     void SetBreakingNews()
     {
         // 속보인지 체크는 얘를 호출하는 함수에서 해둘 예정... if(authenticity==속보){출력메시지=SetBreakingNews();} else{출력메시지=SetRandomMessage();} 이렇게

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpriteInfo
 {
-    public Sprite sprite; // 이미지 스프아리트
+    public Sprite sprite; // 이미지 스프라이트
     public bool isSandglass; // 모래시계 참/거짓 여부를 담는 속성
     public Terror_methods methodName; // 방법 이름을 담아두는 속성 (이걸로 걸러야 하니까)
 
@@ -69,6 +69,9 @@ public class PictureGenerator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 폴더 내의 스프라이트 전체를 배열에 담는 함수
+    /// </summary>
     void LoadAllSprites()
     {
         Sprite[] sprites = Resources.LoadAll<Sprite>("Pictures");
@@ -87,6 +90,11 @@ public class PictureGenerator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 스프라이트 이름에 포함된 단어에 해당하는 값을 반환하는 함수
+    /// </summary>
+    /// <param name="spriteName">스프라이트 이름</param>
+    /// <returns>Terror_methods 값</returns>
     Terror_methods GetMethodNameFromSpriteName(string spriteName)
     {
         if (spriteName.Contains("hostage")) return Terror_methods.인질극;
@@ -100,7 +108,9 @@ public class PictureGenerator : MonoBehaviour
         return Terror_methods.사보타주; // 위에서 if문에 안 걸렸다면 오류니까 일단은 사보타주로 설정
     }
 
-
+    /// <summary>
+    /// 출력할 그림을 정하는 함수
+    /// </summary>
     void SetRandomPicture()
     {
         List<SpriteInfo> candidateSprites;
@@ -135,7 +145,7 @@ public class PictureGenerator : MonoBehaviour
         {
             //Debug.Log("Current real_authenticity: " + real_authenticity);
             //Debug.Log("Current false_elt: " + false_elt);
-            if (real_authenticity == Authenticity.true1) // 메시지가 참인 메시지면 거기서 언급한 특정 방법의 그림을 띄워야 함
+            if (real_authenticity == Authenticity.true1 || (real_authenticity == Authenticity.false1 && false_elt == FalseElements.location)) // 메시지가 참인 메시지면 거기서 언급한 특정 방법의 그림을 띄워야 함
             {
                 //Debug.Log("Selecting true logo & method picture");
                 candidateSprites = spriteInfos.FindAll(spriteInfo => spriteInfo.isSandglass && spriteInfo.methodName== messageGenerator.current_method); 
