@@ -20,25 +20,25 @@ public enum FalseElements
 public class Posts
 {
     /**담아야 할 속성: 
-     * real_authenticity(찐 참거짓)
+     * real_integrity(찐 참거짓)
      * current_scale (속보일 경우)
      * location: current_location or false_location
      * method: current_method or false_method
      * selectedSpriteInfo : isSandglass  --> 이거... 좀 더 고민해야 함 그림 관련 속성을 어떻게 넣을지 (그림 이름만? 문양 참거짓도? 방법까지?)
      * FalseElements
-     * guess_authenticity(판단한 참거짓)
+     * guess_integrity(판단한 참거짓)
      * isCorrect(게시물==진위여부면 정답 아니면 오답)
      * postnum (게시글 번호)
      * 
      * 놓친 거 있나? 닉넴도 담아놔야 하나?...
     **/
-    //public bool real_authenticity; 
+    //public bool real_integrity; 
     //public bool isSandglass; // 모래시계 참/거짓 여부를 담는 속성
     //public Terror_methods methodName; 
 
-    //public Posts(bool real_authenticity, bool isSandglass, Terror_methods methodName)
+    //public Posts(bool real_integrity, bool isSandglass, Terror_methods methodName)
     //{
-    //    this.real_authenticity = real_authenticity;
+    //    this.real_integrity = real_integrity;
     //    this.isSandglass = isSandglass;
     //    this.methodName = methodName;
     //}
@@ -51,7 +51,7 @@ public class MessageGenerator : MonoBehaviour
 {
     private const string SceneLoadCountKey = "SceneLoadCount";
 
-    public Integrity real_authenticity;
+    public Integrity real_integrity;
     public FalseElements false_elt;
     private PersistentData persistentData = PersistentData.Instance; //PersistentData 인스턴스에 접근하기
 
@@ -109,9 +109,9 @@ public class MessageGenerator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P)) // 테스트용
         {
             Integrity[] authenticities = (Integrity[])System.Enum.GetValues(typeof(Integrity));
-            real_authenticity = authenticities[Random.Range(0, authenticities.Length)];
-            Debug.Log($"진위여부: {real_authenticity}");
-            if (real_authenticity != Integrity.속보)
+            real_integrity = authenticities[Random.Range(0, authenticities.Length)];
+            Debug.Log($"진위여부: {real_integrity}");
+            if (real_integrity != Integrity.속보)
             {
                 SetRandomMessage();
             }
@@ -197,7 +197,7 @@ public class MessageGenerator : MonoBehaviour
         string selected_message = messages[Random.Range(0, messages.Count)]; // 게시물 멘트 랜덤 선택
 
         // 가짜로 적을 항목 랜덤 선택
-        if (real_authenticity == Integrity.거짓)
+        if (real_integrity == Integrity.거짓)
         {
             FalseElements[] false_elts = (FalseElements[])System.Enum.GetValues(typeof(FalseElements));
             false_elt = false_elts[Random.Range(0, false_elts.Length)];
@@ -211,7 +211,7 @@ public class MessageGenerator : MonoBehaviour
 
         // 문구 대충 틀만..
 
-        if (real_authenticity == Integrity.참 || (real_authenticity == Integrity.거짓 && false_elt== FalseElements.picture)) // 진위 여부가 참이거나 [진위여부는 거짓인데 그림이 거짓]인 경우
+        if (real_integrity == Integrity.참 || (real_integrity == Integrity.거짓 && false_elt== FalseElements.picture)) // 진위 여부가 참이거나 [진위여부는 거짓인데 그림이 거짓]인 경우
         {
             current_method = persistentData.current_methods[Random.Range(0, persistentData.current_methods.Count)]; // 게시물에 담을 방법(참) 랜덤 선택
             printed_message = string.Format(selected_message, persistentData.current_location, current_method); // 게시물 문구(참) 만들기
@@ -259,7 +259,7 @@ public class MessageGenerator : MonoBehaviour
     /// </summary>
     void SetBreakingNews()
     {
-        // 속보인지 체크는 얘를 호출하는 함수에서 해둘 예정... if(authenticity==속보){출력메시지=SetBreakingNews();} else{출력메시지=SetRandomMessage();} 이렇게
+        // 속보인지 체크는 얘를 호출하는 함수에서 해둘 예정... if(integrity==속보){출력메시지=SetBreakingNews();} else{출력메시지=SetRandomMessage();} 이렇게
         // 그래서 여기서는 내용만 구성해주면 될듯
 
         // 언론사 랜덤 선택 구현하기
