@@ -21,7 +21,7 @@ public class SpriteInfo
 
 public class PictureGenerator : MonoBehaviour
 {
-    public Authenticity real_authenticity;
+    public Integrity real_authenticity;
     public FalseElements false_elt;
     private PersistentData persistentData = PersistentData.Instance; //PersistentData 인스턴스에 접근하기
     public List<SpriteInfo> spriteInfos;
@@ -116,7 +116,7 @@ public class PictureGenerator : MonoBehaviour
         List<SpriteInfo> candidateSprites;
 
         
-        if (real_authenticity == Authenticity.false1 && false_elt == FalseElements.picture) // if (게시물==거짓 && 거짓항목==그림) i.e. 거짓 그림을 출력해야 하는 경우
+        if (real_authenticity == Integrity.거짓 && false_elt == FalseElements.picture) // if (게시물==거짓 && 거짓항목==그림) i.e. 거짓 그림을 출력해야 하는 경우
         {
             //출력그림 = ( 모래시계==0 || 거짓 방법 )에 해당하는 그림
 
@@ -145,7 +145,7 @@ public class PictureGenerator : MonoBehaviour
         {
             //Debug.Log("Current real_authenticity: " + real_authenticity);
             //Debug.Log("Current false_elt: " + false_elt);
-            if (real_authenticity == Authenticity.true1 || (real_authenticity == Authenticity.false1 && false_elt == FalseElements.location)) // 메시지가 참인 메시지면 거기서 언급한 특정 방법의 그림을 띄워야 함
+            if (real_authenticity == Integrity.참 || (real_authenticity == Integrity.거짓 && false_elt == FalseElements.location)) // 메시지가 참인 메시지면 거기서 언급한 특정 방법의 그림을 띄워야 함
             {
                 //Debug.Log("Selecting true logo & method picture");
                 candidateSprites = spriteInfos.FindAll(spriteInfo => spriteInfo.isSandglass && spriteInfo.methodName== messageGenerator.current_method); 

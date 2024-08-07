@@ -7,9 +7,9 @@ using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 
 
-public enum Authenticity
+public enum Integrity
 {
-    true1, false1, 속보
+    참, 거짓, 속보
 }
 
 public enum FalseElements
@@ -51,7 +51,7 @@ public class MessageGenerator : MonoBehaviour
 {
     private const string SceneLoadCountKey = "SceneLoadCount";
 
-    public Authenticity real_authenticity;
+    public Integrity real_authenticity;
     public FalseElements false_elt;
     private PersistentData persistentData = PersistentData.Instance; //PersistentData 인스턴스에 접근하기
 
@@ -108,10 +108,10 @@ public class MessageGenerator : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P)) // 테스트용
         {
-            Authenticity[] authenticities = (Authenticity[])System.Enum.GetValues(typeof(Authenticity));
+            Integrity[] authenticities = (Integrity[])System.Enum.GetValues(typeof(Integrity));
             real_authenticity = authenticities[Random.Range(0, authenticities.Length)];
-            Debug.Log($"authenticity: {real_authenticity}");
-            if (real_authenticity != Authenticity.속보)
+            Debug.Log($"진위여부: {real_authenticity}");
+            if (real_authenticity != Integrity.속보)
             {
                 SetRandomMessage();
             }
@@ -125,9 +125,9 @@ public class MessageGenerator : MonoBehaviour
         // 스테이지마다 적용할 거
         /**
          * int (num_of_true, num_breaking) = SetAuthRatio(sceneLoadCount);
-         * AuthenticityRatio(num_of_true, num_breaking);
+         * IntegrityRatio(num_of_true, num_breaking);
          * foreach( elt in post_list) {
-         *      if (elt != Authenticity.속보){
+         *      if (elt != Integrity.속보){
          *          SetRandomMessage();
          *      }
          *      else {
@@ -158,26 +158,26 @@ public class MessageGenerator : MonoBehaviour
     /// <param name="num_of_true">19개 중 참인 게시물의 개수</param>
     /// <param name="num_breaking">속보의 위치 (카운트는 1부터 시작)</param>
     /// <returns>(참, 거짓, 속보) 순서 리스트</returns>
-    private List<Authenticity> AuthenticityRatio(int num_of_true, int num_breaking)
+    private List<Integrity> IntegrityRatio(int num_of_true, int num_breaking)
     {
-        List<Authenticity>  posts_lists = new List<Authenticity>();
+        List<Integrity>  posts_lists = new List<Integrity>();
 
         for(int i = 0; i < 19; i++) // 19개만 생성 (1개는 속보니까)
         {
             if( i <= num_of_true)
             {
-                posts_lists.Add(Authenticity.true1);
+                posts_lists.Add(Integrity.참);
             }
             else
             {
-                posts_lists.Add(Authenticity.false1);
+                posts_lists.Add(Integrity.거짓);
             }
         }
         // list shuffle
         System.Random rand = new System.Random();
-        List<Authenticity> posts_list = posts_lists.OrderBy(_ => rand.Next()).ToList();
+        List<Integrity> posts_list = posts_lists.OrderBy(_ => rand.Next()).ToList();
 
-        posts_list.Add(Authenticity.속보);
+        posts_list.Add(Integrity.속보);
 
         //switch (num_breaking번째랑 속보랑 위치 바꾸기)
         (posts_list[posts_list.Count - 1], posts_list[num_breaking-1]) = (posts_list[num_breaking-1], posts_list[posts_list.Count - 1]);
@@ -197,11 +197,11 @@ public class MessageGenerator : MonoBehaviour
         string selected_message = messages[Random.Range(0, messages.Count)]; // 게시물 멘트 랜덤 선택
 
         // 가짜로 적을 항목 랜덤 선택
-        if (real_authenticity == Authenticity.false1)
+        if (real_authenticity == Integrity.거짓)
         {
             FalseElements[] false_elts = (FalseElements[])System.Enum.GetValues(typeof(FalseElements));
             false_elt = false_elts[Random.Range(0, false_elts.Length)];
-            Debug.Log($"false element: {false_elt}");
+            Debug.Log($"거짓 항목: {false_elt}");
         }
         
 
@@ -211,7 +211,7 @@ public class MessageGenerator : MonoBehaviour
 
         // 문구 대충 틀만..
 
-        if (real_authenticity == Authenticity.true1 || (real_authenticity == Authenticity.false1 && false_elt== FalseElements.picture)) // 진위 여부가 참이거나 [진위여부는 거짓인데 그림이 거짓]인 경우
+        if (real_authenticity == Integrity.참 || (real_authenticity == Integrity.거짓 && false_elt== FalseElements.picture)) // 진위 여부가 참이거나 [진위여부는 거짓인데 그림이 거짓]인 경우
         {
             current_method = persistentData.current_methods[Random.Range(0, persistentData.current_methods.Count)]; // 게시물에 담을 방법(참) 랜덤 선택
             printed_message = string.Format(selected_message, persistentData.current_location, current_method); // 게시물 문구(참) 만들기
@@ -250,7 +250,7 @@ public class MessageGenerator : MonoBehaviour
         }
         
 
-        Debug.Log(printed_message);
+        Debug.Log($"{nickname}: {printed_message}");
         
     }
     
