@@ -13,8 +13,8 @@ TagManager:
   - Water
   - UI
   - 
-  - 
-  - SNS
+  - WhiteBoard
+  - WhiteBoard_SNS
   - 
   - 
   - 
@@ -41,4 +41,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: whiteboard
+    uniqueID: 591983269
     locked: 0

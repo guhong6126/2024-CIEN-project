@@ -9,7 +9,7 @@ public class RayCasting2D : MonoBehaviour
 
     void Start()
     {
-        mask = LayerMask.GetMask("SNS");
+        mask = LayerMask.GetMask("WhiteBoard_SNS");
     }
 
     void Update()
