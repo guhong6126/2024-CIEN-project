@@ -145,7 +145,7 @@ public class PictureGenerator : MonoBehaviour
         {
             //Debug.Log("Current real_integrity: " + real_integrity);
             //Debug.Log("Current false_elt: " + false_elt);
-            if (real_integrity == Integrity.참 || (real_integrity == Integrity.거짓 && false_elt == FalseElements.location)) // 메시지가 참인 메시지면 거기서 언급한 특정 방법의 그림을 띄워야 함
+            if (real_integrity == Integrity.참 || (real_integrity == Integrity.거짓 && false_elt == FalseElements.location)) // 거기서 언급한 특정 방법의 그림을 띄워야 함
             {
                 //Debug.Log("Selecting true logo & method picture");
                 candidateSprites = spriteInfos.FindAll(spriteInfo => spriteInfo.isSandglass && spriteInfo.methodName== messageGenerator.current_method); 

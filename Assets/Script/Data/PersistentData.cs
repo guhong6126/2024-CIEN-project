@@ -27,7 +27,7 @@ public enum Terror_methods
 
 public class PersistentData : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
     public static PersistentData Instance;
     public Terror_scale current_scale;
     public List<Terror_methods> current_methods;
@@ -35,14 +35,14 @@ public class PersistentData : MonoBehaviour
 
     
 
-    private void Awake()
+    private void Awake()  // 매 스테이지마다 실행하도록
     {
         if(Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
             SetCurrentScale();
-            SetCurrentTLocation(); // 게임 메인 화면에서 클릭 입력 받았을 때 실행되게 바꿔야 함 (지금은 테스트하려고 Awake에 넣어둠)
+            SetCurrentTLocation();
         }
         else
         {
@@ -139,7 +139,7 @@ public class PersistentData : MonoBehaviour
 
     }
 
-    
+    // Start is called before the first frame update
     void Start()
     {
         
