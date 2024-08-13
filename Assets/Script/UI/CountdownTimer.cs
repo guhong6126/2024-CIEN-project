@@ -42,6 +42,6 @@ public class CountdownTimer : MonoBehaviour
 
     public void GameOverNewGame()
     {
-        SceneManager.LoadScene("GameOver");
+        SceneManager.LoadScene("TimeOver");
     }
 }
