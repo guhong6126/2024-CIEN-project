@@ -19,4 +19,9 @@ public class ChangeScene : MonoBehaviour
     {
         SceneManager.LoadScene("Submit");
     }
+
+    public void GameOverNewGame()
+    {
+        SceneManager.LoadScene("Main");
+    }
 }

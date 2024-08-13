@@ -16,5 +16,11 @@ EditorBuildSettings:
     guid: 092615ada4f07d84497abccc8ebf7d6e
   - enabled: 1
     path: Assets/Scenes/Submit.unity
+    guid: 5363205e7ed871441882cbdd41d24f91
+  - enabled: 1
+    path: Assets/Scenes/Result.unity
     guid: eaf5410466a61f34aa8c7eebe48bb2b8
+  - enabled: 1
+    path: Assets/Scenes/TimeOver.unity
+    guid: 74f0a0a123faac84db127eb0afb8401a
   m_configObjects: {}

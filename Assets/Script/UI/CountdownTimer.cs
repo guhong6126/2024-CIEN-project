@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class CountdownTimer : MonoBehaviour
 {
-    public float timeRemaining = 180; 
+    public float timeRemaining = 10; 
     public TextMeshProUGUI countdownText; 
 
     void Start()
     {
         if (countdownText == null)
         {
-            Debug.LogError("CountdownText를 할당하지 않았습니다!");
+            Debug.LogError("CountdownText missing");
         }
     }
 
@@ -28,7 +29,7 @@ public class CountdownTimer : MonoBehaviour
         {
             timeRemaining = 0;
             UpdateCountdownText(timeRemaining);
-            
+            GameOverNewGame();
         }
     }
 
@@ -37,5 +38,10 @@ public class CountdownTimer : MonoBehaviour
         int minutes = Mathf.FloorToInt(time / 60); 
         int seconds = Mathf.FloorToInt(time % 60); 
         countdownText.text = string.Format("{0:00}:{1:00}", minutes, seconds); 
+    }
+
+    public void GameOverNewGame()
+    {
+        SceneManager.LoadScene("TimeOver");
     }
 }
