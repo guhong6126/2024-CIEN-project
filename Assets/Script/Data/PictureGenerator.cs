@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; // Image 컴포넌트를 사용하기 위해 추가
 
 public class SpriteInfo
 {
@@ -16,9 +17,6 @@ public class SpriteInfo
     }
 }
 
-
-
-
 public class PictureGenerator : MonoBehaviour
 {
     public Integrity real_integrity;
@@ -26,6 +24,9 @@ public class PictureGenerator : MonoBehaviour
     private PersistentData persistentData = PersistentData.Instance; //PersistentData 인스턴스에 접근하기
     public List<SpriteInfo> spriteInfos;
     private MessageGenerator messageGenerator;
+
+    // Image 컴포넌트를 참조할 변수 추가
+    public Image imageComponent;
 
     // Start is called before the first frame update
     void Start()
@@ -42,16 +43,21 @@ public class PictureGenerator : MonoBehaviour
             Debug.LogError("MessageGenerator instance is not found in the scene.");
             return;
         }
-        
-        
+
+        // Image 컴포넌트가 설정되었는지 확인
+        if (imageComponent == null)
+        {
+            imageComponent = GetComponent<Image>();
+            if (imageComponent == null)
+            {
+                Debug.LogError("Image component is not assigned and could not be found on the same GameObject. Please assign it in the inspector.");
+                return;
+            }
+        }
+
         LoadAllSprites();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void LateUpdate()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -69,9 +75,6 @@ public class PictureGenerator : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 폴더 내의 스프라이트 전체를 배열에 담는 함수
-    /// </summary>
     void LoadAllSprites()
     {
         Sprite[] sprites = Resources.LoadAll<Sprite>("Pictures");
@@ -90,11 +93,6 @@ public class PictureGenerator : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 스프라이트 이름에 포함된 단어에 해당하는 값을 반환하는 함수
-    /// </summary>
-    /// <param name="spriteName">스프라이트 이름</param>
-    /// <returns>Terror_methods 값</returns>
     Terror_methods GetMethodNameFromSpriteName(string spriteName)
     {
         if (spriteName.Contains("hostage")) return Terror_methods.인질극;
@@ -104,26 +102,17 @@ public class PictureGenerator : MonoBehaviour
         if (spriteName.Contains("bioterror")) return Terror_methods.바이오테러;
         if (spriteName.Contains("nuclear")) return Terror_methods.핵공격;
         if (spriteName.Contains("sabotage")) return Terror_methods.사보타주;
-        
+
         return Terror_methods.사보타주; // 위에서 if문에 안 걸렸다면 오류니까 일단은 사보타주로 설정
     }
 
-    /// <summary>
-    /// 출력할 그림을 정하는 함수
-    /// </summary>
     void SetRandomPicture()
     {
         List<SpriteInfo> candidateSprites;
 
-        
-        if (real_integrity == Integrity.거짓 && false_elt == FalseElements.picture) // if (게시물==거짓 && 거짓항목==그림) i.e. 거짓 그림을 출력해야 하는 경우
+        if (real_integrity == Integrity.거짓 && false_elt == FalseElements.picture)
         {
-            //출력그림 = ( 모래시계==0 || 거짓 방법 )에 해당하는 그림
-
-            //Debug.Log("Selecting false picture"); // 여기로 진입했는지 확인 (지금 이 조건인데 올바른 그림이 출력되고 있음)
-
-            // 거짓방법만 담은 리스트 생성     
-            Terror_methods[] allMethods = (Terror_methods[])System.Enum.GetValues(typeof(Terror_methods)); // 모든 method 가져오기
+            Terror_methods[] allMethods = (Terror_methods[])System.Enum.GetValues(typeof(Terror_methods));
             List<Terror_methods> excludedMethods = new List<Terror_methods>();
             foreach (Terror_methods method in allMethods)
             {
@@ -132,47 +121,29 @@ public class PictureGenerator : MonoBehaviour
                     excludedMethods.Add(method);
                 }
             }
-            //Debug.Log("Excluded methods: " + string.Join(", ", excludedMethods)); // 거짓 방법 목록 출력 
 
-            // 모래시계가 거짓이거나 거짓 방법에 해당하는 그림들을 담은 리스트 생성 (isSandglass가 false이거나 false_method와 일치하는 그림)
             candidateSprites = spriteInfos.FindAll(spriteInfo => !spriteInfo.isSandglass || excludedMethods.Contains(spriteInfo.methodName));
-
-            //Debug.Log("Number of candidate sprites for false picture: " + candidateSprites.Count); // 후보 그림 개수 출력
-
-
         }
-        else //참인 그림 출력
+        else
         {
-            //Debug.Log("Current real_integrity: " + real_integrity);
-            //Debug.Log("Current false_elt: " + false_elt);
-            if (real_integrity == Integrity.참 || (real_integrity == Integrity.거짓 && false_elt == FalseElements.location)) // 거기서 언급한 특정 방법의 그림을 띄워야 함
+            if (real_integrity == Integrity.참 || (real_integrity == Integrity.거짓 && false_elt == FalseElements.location))
             {
-                //Debug.Log("Selecting true logo & method picture");
-                candidateSprites = spriteInfos.FindAll(spriteInfo => spriteInfo.isSandglass && spriteInfo.methodName== messageGenerator.current_method); 
-
+                candidateSprites = spriteInfos.FindAll(spriteInfo => spriteInfo.isSandglass && spriteInfo.methodName == messageGenerator.current_method);
             }
             else
-            { // 메시지가 거짓이지만 거짓항목이 그림이 아닌 경우 혹은 메시지가 속보인 경우 => 출력그림 = (모래시계=1 && 참인 방법)에 해당하는 그림
-                //Debug.Log("Selecting true picture");
+            {
                 candidateSprites = spriteInfos.FindAll(spriteInfo => spriteInfo.isSandglass && persistentData.current_methods.Contains(spriteInfo.methodName));
             }
-            
-            
         }
-        
-        if (candidateSprites.Count > 0) //리스트에 여러 장이 들어있으므로 여기에 걸려야 함
+
+        if (candidateSprites.Count > 0)
         {
-            SpriteInfo selectedSpriteInfo = candidateSprites[Random.Range(0, candidateSprites.Count)]; //랜덤으로 하나 뽑고
-            GetComponent<SpriteRenderer>().sprite = selectedSpriteInfo.sprite; //출력ㄱ
-            //Debug.Log("Selected sprite: " + selectedSpriteInfo.sprite.name);
+            SpriteInfo selectedSpriteInfo = candidateSprites[Random.Range(0, candidateSprites.Count)];
+            imageComponent.sprite = selectedSpriteInfo.sprite; // Image 컴포넌트에 스프라이트 할당
         }
-        else // 여기로 가면 뭔가가 잘못된 거임 이거 뜨면 좌절하셈
+        else
         {
             Debug.LogWarning("No suitable sprite found.");
         }
-
     }
-
-
-
 }
