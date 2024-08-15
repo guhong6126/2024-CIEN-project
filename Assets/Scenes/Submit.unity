@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 222244974}
   - component: {fileID: 222244977}
   m_Layer: 5
-  m_Name: south
+  m_Name: South
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -435,6 +435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b6872b1467ac8849be44f3d0befa0fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCondition: 0
 --- !u!1 &518049796
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +450,7 @@ GameObject:
   - component: {fileID: 518049798}
   - component: {fileID: 518049801}
   m_Layer: 5
-  m_Name: west
+  m_Name: West
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -537,6 +538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b6872b1467ac8849be44f3d0befa0fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCondition: 0
 --- !u!1 &841531176
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,7 +913,7 @@ GameObject:
   - component: {fileID: 1213547052}
   - component: {fileID: 1213547055}
   m_Layer: 5
-  m_Name: east
+  m_Name: East
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -999,6 +1001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b6872b1467ac8849be44f3d0befa0fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCondition: 0
 --- !u!1 &1372195296
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,8 +1148,9 @@ GameObject:
   - component: {fileID: 1592271144}
   - component: {fileID: 1592271143}
   - component: {fileID: 1592271142}
+  - component: {fileID: 1592271145}
   m_Layer: 5
-  m_Name: north
+  m_Name: North
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1222,6 +1226,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1592271140}
   m_CullTransparentMesh: 1
+--- !u!114 &1592271145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592271140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b6872b1467ac8849be44f3d0befa0fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCondition: 0
 --- !u!1 &1763757511
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,6 +1289,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeRemaining: 10
   countdownText: {fileID: 1372195297}
+--- !u!1 &1804946472
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1804946474}
+  - component: {fileID: 1804946473}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1804946473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804946472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eef3acab26963048ab9d9be10b2e64c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  current_scale: 0
+  current_methods: 
+  current_location: 0
+--- !u!4 &1804946474
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804946472}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1460.0276, y: 911.45, z: -1.8271899}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1836544640
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,7 +1350,7 @@ GameObject:
   - component: {fileID: 1836544642}
   - component: {fileID: 1836544645}
   m_Layer: 5
-  m_Name: center
+  m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1374,6 +1438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b6872b1467ac8849be44f3d0befa0fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCondition: 0
 --- !u!1 &1974781451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,3 +1515,4 @@ SceneRoots:
   - {fileID: 170081766}
   - {fileID: 1974781454}
   - {fileID: 96886807}
+  - {fileID: 1804946474}

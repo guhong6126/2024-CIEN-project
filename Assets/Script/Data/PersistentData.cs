@@ -15,8 +15,7 @@ public enum Terror_scale
 }
 public enum Terror_location
 {
-    동부, 서부, 남부, 북부, 특별자치구
-    //east, west, south, north, city
+    East, West, South, North, Center
 }
 public enum Terror_methods
 {
@@ -28,25 +27,25 @@ public enum Terror_methods
 public class PersistentData : MonoBehaviour
 {
     
-    public static PersistentData Instance;
+    public static PersistentData Instance { get;  set; }
     public Terror_scale current_scale;
     public List<Terror_methods> current_methods;
     public Terror_location current_location;
 
     
-
-    private void Awake()  // 매 스테이지마다 실행하도록
+    private void Awake()
     {
-        if(Instance == null)
+        // 싱글톤 인스턴스 초기화
+        if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
             SetCurrentScale();
             SetCurrentTLocation();
+            DontDestroyOnLoad(gameObject);  // 씬 전환 시에도 인스턴스가 파괴되지 않도록 설정
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(gameObject);  // 이미 인스턴스가 존재하면 새로운 객체를 파괴
         }
     }
     /// <summary>
@@ -57,6 +56,8 @@ public class PersistentData : MonoBehaviour
         Terror_scale[] terror_scales = (Terror_scale[])System.Enum.GetValues(typeof(Terror_scale)); // create a list containing terror scales (테러 규모를 담는 리스트 생성)
         current_scale = terror_scales[Random.Range(0, terror_scales.Length)]; // select a random element from the list and set it as the current terror scale (리스트에서 규모 하나 랜덤 선택)
         SetTerrorMethods();
+
+        Debug.Log($"scale : {current_scale}");
     }
     /// <summary>
     /// function to randomly set terror location (테러 위치를 랜덤으로 설정하는 함수)
@@ -65,6 +66,7 @@ public class PersistentData : MonoBehaviour
     {
         Terror_location[] terror_locations = (Terror_location[])System.Enum.GetValues(typeof(Terror_location)); // create a list containing terror locations (테러 위치 리스트 생성)
         current_location = terror_locations[Random.Range(0, terror_locations.Length)]; // select a random element from the list and set it as the current terror location (리스트에서 랜덤 선택)
+        Debug.Log($"위치 : {current_location}");
     }
     /// <summary>
     /// function to update list of terror methods (테러 방법 리스트를 업데이트하는 함수)
