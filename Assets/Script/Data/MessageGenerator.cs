@@ -5,7 +5,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
-
+using TMPro; // TextMeshPro 네임스페이스 포함
 
 public enum Integrity
 {
@@ -190,9 +190,11 @@ public class MessageGenerator : MonoBehaviour
     /// <summary>
     /// 랜덤 게시물을 생성하는 함수 (지금은 Debug.Log로 출력하지만 UI에 출력되게 바꿔야 함)
     /// </summary>
+    public TextMeshProUGUI messageTextUI; // TextMeshProUGUI 컴포넌트를 할당할 변수
+
     void SetRandomMessage()
     {
-        string printed_message = string.Empty; //출력할 메시지(아직은 empty)
+        string printed_message = string.Empty; // 출력할 메시지(아직은 empty)
 
         string selected_message = messages[Random.Range(0, messages.Count)]; // 게시물 멘트 랜덤 선택
 
@@ -203,21 +205,19 @@ public class MessageGenerator : MonoBehaviour
             false_elt = false_elts[Random.Range(0, false_elts.Length)];
             Debug.Log($"거짓 항목: {false_elt}");
         }
-        
 
         // 닉네임도 뽑아야 함...
         string nickname = nicknames[Random.Range(0, nicknames.Count)]; // 닉네임 랜덤 선택
 
-
         // 문구 대충 틀만..
-
-        if (real_integrity == Integrity.참 || (real_integrity == Integrity.거짓 && false_elt== FalseElements.picture)) // 진위 여부가 참이거나 [진위여부는 거짓인데 그림이 거짓]인 경우
+        if (real_integrity == Integrity.참 || (real_integrity == Integrity.거짓 && false_elt == FalseElements.picture)) // 진위 여부가 참이거나 [진위여부는 거짓인데 그림이 거짓]인 경우
         {
             current_method = persistentData.current_methods[Random.Range(0, persistentData.current_methods.Count)]; // 게시물에 담을 방법(참) 랜덤 선택
             printed_message = string.Format(selected_message, persistentData.current_location, current_method); // 게시물 문구(참) 만들기
         }
-        else {
-            if(false_elt == FalseElements.location)
+        else
+        {
+            if (false_elt == FalseElements.location)
             {
                 Terror_methods current_method = persistentData.current_methods[Random.Range(0, persistentData.current_methods.Count)]; // 게시물에 담을 방법(참) 랜덤 선택
 
@@ -226,11 +226,9 @@ public class MessageGenerator : MonoBehaviour
                 allLocations.Remove(persistentData.current_location); // 거기서 현재 지역 지우기
                 Terror_location false_location = allLocations[Random.Range(0, allLocations.Count)]; // 지역 하나 랜덤 선택
 
-
                 printed_message = string.Format(selected_message, false_location, current_method); // 게시물 문구(거짓 지역) 만들기
             }
-
-            else if(false_elt == FalseElements.methods)
+            else if (false_elt == FalseElements.methods)
             {
                 // 거짓방법 랜덤 선택        
                 Terror_methods[] allMethods = (Terror_methods[])System.Enum.GetValues(typeof(Terror_methods)); // 모든 method 가져오기
@@ -245,15 +243,13 @@ public class MessageGenerator : MonoBehaviour
                 Terror_methods false_method = excludedMethods[Random.Range(0, excludedMethods.Count)];
 
                 printed_message = string.Format(selected_message, persistentData.current_location, false_method); // 게시물 문구(거짓 방법) 만들기
-
             }
         }
-        
 
-        Debug.Log($"{nickname}: {printed_message}");
-        
+        // TextMeshPro UI 텍스트에 출력
+        messageTextUI.text = $"{nickname}: {printed_message}";
     }
-    
+
     /// <summary>
     /// 속보 문구를 생성하는 함수
     /// </summary>
