@@ -102,9 +102,11 @@ GameObject:
   - component: {fileID: 4455436936862496514}
   - component: {fileID: 4191200890476036440}
   - component: {fileID: 1858961735421579269}
+  - component: {fileID: -2774540028594683030}
+  - component: {fileID: -6074508661800954560}
   m_Layer: 8
   m_Name: SNSmessage
-  m_TagString: Untagged
+  m_TagString: SNSmessage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,6 +171,31 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-2774540028594683030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3889279761142466058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35aa8c2f2e6b557409428e9fa5ce613c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+--- !u!225 &-6074508661800954560
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3889279761142466058}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &6715580258941161785
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,6 +346,8 @@ MonoBehaviour:
   real_integrity: 0
   false_elt: 0
   current_method: 0
+  nicknameList: []
+  printed_messages: []
   messageTextUI: {fileID: 1711066090930238567}
 --- !u!1 &7537366166601460837
 GameObject:
