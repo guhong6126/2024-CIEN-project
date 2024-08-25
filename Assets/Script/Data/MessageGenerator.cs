@@ -17,46 +17,20 @@ public enum FalseElements
     location, methods, picture
 }
 
-public class Posts
-{
-    /**담아야 할 속성: 
-     * real_integrity(찐 참거짓)
-     * current_scale (속보일 경우)
-     * location: current_location or false_location
-     * method: current_method or false_method
-     * selectedSpriteInfo : isSandglass  --> 이거... 좀 더 고민해야 함 그림 관련 속성을 어떻게 넣을지 (그림 이름만? 문양 참거짓도? 방법까지?)
-     * FalseElements
-     * guess_integrity(판단한 참거짓)
-     * isCorrect(게시물==진위여부면 정답 아니면 오답)
-     * postnum (게시글 번호)
-     * 
-     * 놓친 거 있나? 닉넴도 담아놔야 하나?...
-    **/
-    //public bool real_integrity; 
-    //public bool isSandglass; // 모래시계 참/거짓 여부를 담는 속성
-    //public Terror_methods methodName; 
-
-    //public Posts(bool real_integrity, bool isSandglass, Terror_methods methodName)
-    //{
-    //    this.real_integrity = real_integrity;
-    //    this.isSandglass = isSandglass;
-    //    this.methodName = methodName;
-    //}
-}
-
-
 
 
 public class MessageGenerator : MonoBehaviour
 {
     private const string SceneLoadCountKey = "SceneLoadCount";
 
+    public static MessageGenerator Instance;
     public Integrity real_integrity;
     public FalseElements false_elt;
     private PersistentData persistentData = PersistentData.Instance; //PersistentData 인스턴스에 접근하기
 
     public Terror_methods current_method;
-
+    public List<string> nicknameList;
+    public List<string> printed_messages;
 
     private List<string> messages = new List<string>
     {
@@ -71,11 +45,14 @@ public class MessageGenerator : MonoBehaviour
     };
     private List<string> nicknames = new List<string>
     {
-        "고니","안졸리나젤리","MrBeast","뿌뿌뽕"
+        "고라니","안졸리나젤리","붕방붕","화양연화","고랭이","라단조","물붓기시험","수마트라섬","지구가까운점","소망",
+        "니르","삐걱","여흘여흘","뚱싯뚱싯","흐르르흐르르","어처구니없는","누쀠","채레","퐈크퓨","몽땅",
+        "인공눈물","다같이","진진자라","펭귄","읽씹백천만","무더위","이조명온도습도","듄듄","고영희",
+        "Sodium","Kitsch","rizz","fratty","JellyBeans","Limited_Edition","Math_","英吉利","倫敦","bandit"
     };
     private List<string> presses = new List<string>
     {
-        "BBC","CNN","The New York Times"
+        "BBA","DNN","The York Times","Mando Times"
     };
 
     // Start is called before the first frame update
@@ -98,6 +75,11 @@ public class MessageGenerator : MonoBehaviour
         Terror_scale scale = persistentData.current_scale;
         Terror_location location = persistentData.current_location;
         List<Terror_methods> methods = persistentData.current_methods;
+
+        nicknameList = new List<string>();
+        printed_messages = new List<string>();
+
+
 
 
     }
@@ -208,6 +190,7 @@ public class MessageGenerator : MonoBehaviour
 
         // 닉네임도 뽑아야 함...
         string nickname = nicknames[Random.Range(0, nicknames.Count)]; // 닉네임 랜덤 선택
+        nicknameList.Add(nickname);
 
         // 문구 대충 틀만..
         if (real_integrity == Integrity.참 || (real_integrity == Integrity.거짓 && false_elt == FalseElements.picture)) // 진위 여부가 참이거나 [진위여부는 거짓인데 그림이 거짓]인 경우
@@ -245,9 +228,9 @@ public class MessageGenerator : MonoBehaviour
                 printed_message = string.Format(selected_message, persistentData.current_location, false_method); // 게시물 문구(거짓 방법) 만들기
             }
         }
-
+        printed_messages.Add(printed_message);
         // TextMeshPro UI 텍스트에 출력
-        messageTextUI.text = $"{nickname}: {printed_message}";
+        // messageTextUI.text = $"{nickname}: {printed_message}";
     }
 
     /// <summary>

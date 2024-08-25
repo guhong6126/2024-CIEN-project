@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SNS
   - SNSmessage
+  - Notes
   layers:
   - Default
   - TransparentFX
