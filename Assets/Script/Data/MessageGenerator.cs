@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using System.Linq;
-using UnityEngine.UIElements;
-using UnityEngine.SceneManagement;
-using TMPro; // TextMeshPro 네임스페이스 포함
+
 
 public enum Integrity
 {
@@ -21,16 +19,23 @@ public enum FalseElements
 
 public class MessageGenerator : MonoBehaviour
 {
-    private const string SceneLoadCountKey = "SceneLoadCount";
+
+    public delegate void DataInitializedHandler();
+    public event DataInitializedHandler OnDataInitialized;
+    public bool IsInitialized { get; private set; } = false;
+
 
     public static MessageGenerator Instance;
     public Integrity real_integrity;
+    public List<Integrity> post_list;
+
     public FalseElements false_elt;
     private PersistentData persistentData = PersistentData.Instance; //PersistentData 인스턴스에 접근하기
 
     public Terror_methods current_method;
     public List<string> nicknameList;
     public List<string> printed_messages;
+
 
     private List<string> messages = new List<string>
     {
@@ -55,20 +60,28 @@ public class MessageGenerator : MonoBehaviour
         "BBA","DNN","The York Times","Mando Times"
     };
 
-    // Start is called before the first frame update
+
+    private void Awake()
+    {
+        //if (Instance != null && Instance != this)
+        //{
+        //    //
+        //    return;
+        //}
+
+        Instance = this;
+
+    }
+
     void Start()
     {
-        // 씬 로드 카운트 증가
-        int sceneLoadCount = PlayerPrefs.GetInt(SceneLoadCountKey, 0); // 초기화하는 함수도 만들어야 함
-        sceneLoadCount++;
-        PlayerPrefs.SetInt(SceneLoadCountKey, sceneLoadCount);
 
 
-        //나중에 클래스 만들고 나서 전부 바꿔야 함
+        //나중에 클래스 만들면 전부 바꿔야 함
         persistentData = PersistentData.Instance;
         if (persistentData == null)
         {
-            Debug.LogError("PersistentData instance is null. Please check the initialization.");
+            Debug.LogError("PersistentData Instance is null. Please check the initialization.");
             return;
         }
 
@@ -76,17 +89,67 @@ public class MessageGenerator : MonoBehaviour
         Terror_location location = persistentData.current_location;
         List<Terror_methods> methods = persistentData.current_methods;
 
+        //닉네임, 문구, 참거짓 리스트 초기화
         nicknameList = new List<string>();
         printed_messages = new List<string>();
+        post_list = new List<Integrity>();
+
+        StartCoroutine(WaitForSceneLoadCounter());
+
+    }
+    private IEnumerator WaitForSceneLoadCounter()
+    {
+        // 인스턴스가 생성될 때까지 대기
+        while (SceneLoadCounter.Instance == null || !SetSceneCount.Instance.IsInitialized)
+        {
+            //if(SceneLoadCounter.Instance == null) { Debug.Log("SceneLoadCounter.Instance == null"); }
+            // if (!SetSceneCount.Instance.IsInitialized) { Debug.Log("!SetSceneCount.Instance.IsInitialized"); }
+
+            yield return null; // 프레임 대기
+        }
+        SceneLoadCounter.Instance.OnCountInitialized -= OnCountInitialized;
+        SceneLoadCounter.Instance.OnCountInitialized += OnCountInitialized;
+
+        OnCountInitialized();
+    }
+
+    private void OnCountInitialized()
+    {
+        int sceneLoadCount = PlayerPrefs.GetInt(SetSceneCount.SceneLoadCountKey, 0);
+        Debug.Log($"STG Count: {sceneLoadCount}");
+        // 스테이지마다 적용할 거
+        (int num_of_true, int num_breaking) = SetAuthRatio(sceneLoadCount);
+        Debug.Log($"true: {num_of_true}개, 속보: {num_breaking}번째");
+        post_list = IntegrityRatio(num_of_true, num_breaking); // 참거짓 여부를 담은 리스트
 
 
+        foreach (Integrity elt in post_list)
+        {
+            if (elt != Integrity.속보)
+            {
+                SetRandomMessage();
+            }
+            else
+            {
+                SetBreakingNews();
+            }
+        }
 
-
+        if (nicknameList.Count == 20 && printed_messages.Count == 20 && IsInitialized == false) //리스트 다 만들었으면
+        {
+            IsInitialized = true;
+            OnDataInitialized?.Invoke(); //MessageIndex에 이벤트 넘길거
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (nicknameList.Count == 20 && printed_messages.Count == 20 && IsInitialized == false)
+        {
+            IsInitialized = true;
+            OnDataInitialized?.Invoke();
+        }
 
         if (Input.GetKeyDown(KeyCode.P)) // 테스트용
         {
@@ -101,22 +164,10 @@ public class MessageGenerator : MonoBehaviour
             {
                 SetBreakingNews();
             }
-            
+
         }
 
-        // 스테이지마다 적용할 거
-        /**
-         * int (num_of_true, num_breaking) = SetAuthRatio(sceneLoadCount);
-         * IntegrityRatio(num_of_true, num_breaking);
-         * foreach( elt in post_list) {
-         *      if (elt != Integrity.속보){
-         *          SetRandomMessage();
-         *      }
-         *      else {
-         *          SetBreakingNews();
-         *      }
-         * }
-         * */
+
 
     }
 
@@ -142,11 +193,11 @@ public class MessageGenerator : MonoBehaviour
     /// <returns>(참, 거짓, 속보) 순서 리스트</returns>
     private List<Integrity> IntegrityRatio(int num_of_true, int num_breaking)
     {
-        List<Integrity>  posts_lists = new List<Integrity>();
+        List<Integrity> posts_lists = new List<Integrity>();
 
-        for(int i = 0; i < 19; i++) // 19개만 생성 (1개는 속보니까)
+        for (int i = 0; i < 19; i++) // 19개만 생성 (1개는 속보니까)
         {
-            if( i <= num_of_true)
+            if (i <= num_of_true)
             {
                 posts_lists.Add(Integrity.참);
             }
@@ -155,15 +206,22 @@ public class MessageGenerator : MonoBehaviour
                 posts_lists.Add(Integrity.거짓);
             }
         }
-        // list shuffle
+        // 리스트 셔플
         System.Random rand = new System.Random();
         List<Integrity> posts_list = posts_lists.OrderBy(_ => rand.Next()).ToList();
 
-        posts_list.Add(Integrity.속보);
+        posts_list.Add(Integrity.속보); //속보 추가
+
+        if (num_breaking < 1 || num_breaking > posts_list.Count)
+        {
+            Debug.LogError($"Invalid num_breaking value: {num_breaking}. It must be between 1 and {posts_list.Count}.");
+            return posts_list; // 오류 발생 시 현재 리스트 반환
+        }
+
 
         //switch (num_breaking번째랑 속보랑 위치 바꾸기)
-        (posts_list[posts_list.Count - 1], posts_list[num_breaking-1]) = (posts_list[num_breaking-1], posts_list[posts_list.Count - 1]);
-        
+        (posts_list[posts_list.Count - 1], posts_list[num_breaking - 1]) = (posts_list[num_breaking - 1], posts_list[posts_list.Count - 1]);
+
         return posts_list;
     }
 
@@ -172,8 +230,6 @@ public class MessageGenerator : MonoBehaviour
     /// <summary>
     /// 랜덤 게시물을 생성하는 함수 (지금은 Debug.Log로 출력하지만 UI에 출력되게 바꿔야 함)
     /// </summary>
-    public TextMeshProUGUI messageTextUI; // TextMeshProUGUI 컴포넌트를 할당할 변수
-
     void SetRandomMessage()
     {
         string printed_message = string.Empty; // 출력할 메시지(아직은 empty)
@@ -228,9 +284,9 @@ public class MessageGenerator : MonoBehaviour
                 printed_message = string.Format(selected_message, persistentData.current_location, false_method); // 게시물 문구(거짓 방법) 만들기
             }
         }
+        //Debug.Log(printed_message);
         printed_messages.Add(printed_message);
-        // TextMeshPro UI 텍스트에 출력
-        // messageTextUI.text = $"{nickname}: {printed_message}";
+
     }
 
     /// <summary>
@@ -243,7 +299,7 @@ public class MessageGenerator : MonoBehaviour
 
         // 언론사 랜덤 선택 구현하기
         string pressname = presses[Random.Range(0, presses.Count)]; // 언론사명 랜덤 선택
-
+        nicknameList.Add(pressname);
 
         // 문구 대충 틀만..
 
@@ -263,10 +319,19 @@ public class MessageGenerator : MonoBehaviour
         //        break;
         //}
         string printed_message = string.Format(selected_message, persistentData.current_scale); // 게시물 문구(참) 만들기
-        Debug.Log(printed_message);
-        
+        //Debug.Log($"속보: {printed_message}");
+        printed_messages.Add(printed_message);
 
-        // 그림은 SetRandomPicture 쓰면 됨
 
+
+    }
+
+    private void OnDestroy()
+    {
+        // 이벤트 구독 해제
+        if (SceneLoadCounter.Instance != null)
+        {
+            SceneLoadCounter.Instance.OnCountInitialized -= OnCountInitialized;
+        }
     }
 }
