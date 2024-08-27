@@ -49,16 +49,21 @@ public class NoteIndex : MonoBehaviour
         {
             yield return null; // 프레임 대기
         }
+        //while(messageGenerator.post_list == null || messageGenerator.m_locations == null) //여기서 걸리는 것 같음
+        //{
+        //    yield return null; // 프레임 대기
+        //}
         // MessageGenerator 인스턴스가 존재할 때 이벤트 구독
         MessageGenerator.Instance.OnDataInitialized += OnDataInitialized;
-        Debug.Log("NTID 이벤트 호출 ㄱㄱ");  //얘는 왜 포스트잇이 생성된 이후에 호출되는 걸까
+        Debug.Log("NTID 이벤트 호출 ㄱㄱ");  //얘는 왜 포스트잇이 생성된 이후에 호출되는 걸까 -> 포스트잇 오브젝트가 화이트보드 버튼을 클릭하기 전까지는 비활성화 상태라서 Awake가 실행되지 않기 때문.. 인 것 같은데 그럼 왜 밑에 Index 코드는 잘 작동하는 거지??
         OnDataInitialized();
     }
+
 
     private void OnDataInitialized()
     {
 
-        indexText.text = "#" + (index + 1); //얘는 왜 
+        indexText.text = "#" + (index + 1);
 
         if (MessageGenerator.Instance.nicknameList.Count == 0 || MessageGenerator.Instance.printed_messages.Count == 0)
         {
@@ -67,20 +72,67 @@ public class NoteIndex : MonoBehaviour
         }
         // MessageGenerator의 데이터가 준비된 후에 처리해야 함
 
-        Debug.Log("NTID OnDataInitialized 메시지 생성 ㄱㄱ"); 
-        if (index >= 0 && index < MessageGenerator.Instance.nicknameList.Count) //이 조건은 없애도 될 것 같긴 함
+        Debug.Log("NTID OnDataInitialized 메시지 생성 ㄱㄱ"); // 여기까지 왔는데 아래로 안 넘어감 끼발  NullReferenceException뜸
+       
+
+        if (messageGenerator.post_list == null) // 여기서 에러 뜸
         {
-            if (messageGenerator.post_list[index] == Integrity.속보)
-            {
-                contentText.text = $"속보\n⌛ = {persistentData.current_scale}규모";
-                Debug.Log($"속보\n⌛ = {persistentData.current_scale}규모 할당완");
-            }
-            else
-            {
-                contentText.text = $"\n{messageGenerator.m_locations[index]}\n{messageGenerator.m_methods[index]}";
-                Debug.Log($"\n{messageGenerator.m_locations[index]}\n{messageGenerator.m_methods[index]} 할당완");
-            }
+            Debug.LogError("post_list is null.");
+            return;
         }
+
+        if (messageGenerator.m_locations == null)
+        {
+            Debug.LogError("m_locations is null.");
+            return;
+        }
+
+        if (messageGenerator.m_methods == null)
+        {
+            Debug.LogError("m_methods is null.");
+            return;
+        }
+
+        if (messageGenerator.post_list.Count <= index)
+        {
+            Debug.LogError($"post_list index {index} is out of range.");
+            return;
+        }
+
+        if (contentText == null)
+        {
+            Debug.LogError("contentText is null.");
+            return;
+        }
+
+        Debug.Log("Null check~!");
+        
+        if (messageGenerator.post_list[index] == Integrity.속보)
+        {
+            contentText.text = $"속보\n⌛ = {persistentData.current_scale}규모";
+            Debug.Log($"속보\n⌛ = {persistentData.current_scale}규모 할당완");
+        }
+        else
+        {
+            contentText.text = $"\n{messageGenerator.m_locations[index]}\n{messageGenerator.m_methods[index]}";
+            Debug.Log($"\n{messageGenerator.m_locations[index]}\n{messageGenerator.m_methods[index]} 할당완");
+        }
+
+
+
+        //if (index >= 0 && index < MessageGenerator.Instance.nicknameList.Count) //이 조건은 없애도 될 것 같긴 함
+        //{
+        //    if (messageGenerator.post_list[index] == Integrity.속보)
+        //    {
+        //        contentText.text = $"속보\n⌛ = {persistentData.current_scale}규모";
+        //        Debug.Log($"속보\n⌛ = {persistentData.current_scale}규모 할당완");
+        //    }
+        //    else
+        //    {
+        //        contentText.text = $"\n{messageGenerator.m_locations[index]}\n{messageGenerator.m_methods[index]}";
+        //        Debug.Log($"\n{messageGenerator.m_locations[index]}\n{messageGenerator.m_methods[index]} 할당완");
+        //    }
+        //}
         
 
     }

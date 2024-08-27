@@ -72,8 +72,8 @@ public class MessageGenerator : MonoBehaviour
         }
         else
         {
-            Debug.Log("instance 이미 존재");
-            //Destroy(gameObject); // 이미 존재하는 싱글톤이 있다면 새로운 인스턴스를 파괴합니다.
+            //Debug.Log("instance 이미 존재");
+            //Destroy(gameObject); //근데 이러면 ... 하나만 잘 있는데도 삭제하던데 
         }
         isSubscribed = false;
     }
@@ -114,7 +114,6 @@ public class MessageGenerator : MonoBehaviour
 
             yield return null; // 프레임 대기
         }
-        Debug.Log($"-isSubscribed: {isSubscribed}");
         if (!isSubscribed)
         {
             isSubscribed = true;
@@ -150,7 +149,9 @@ public class MessageGenerator : MonoBehaviour
         if (nicknameList.Count == 20 && printed_messages.Count == 20 && IsInitialized == false) //리스트 다 만들었으면
         {
             IsInitialized = true;
+            //Debug.Log($"IsInitialized : {IsInitialized}, 이벤트 호출 ㄱ");
             OnDataInitialized?.Invoke(); //MessageIndex에 이벤트 넘길거
+            //Debug.Log("이벤트 호출 끝");
         }
     }
 
@@ -191,7 +192,7 @@ public class MessageGenerator : MonoBehaviour
     /// <returns>(참인 게시물 개수, 속보 순서)</returns>
     private (int, int) SetAuthRatio(int num)
     {
-        Debug.Log($"받은 인자: {num}");
+        //Debug.Log($"받은 인자: {num}");
         int n_true, n_brk;
         n_true = 19 - num * 2; // 예시임 비율은 기획한테 물어보기
         n_brk = 5 + (num - 1) * 2;
