@@ -22,7 +22,7 @@ public class CountdownTimer : MonoBehaviour
     {
         if (timeRemaining > 0)
         {
-            timeRemaining -= Time.deltaTime; // ³²Àº ½Ã°£À» °¨¼Ò
+            timeRemaining -= Time.deltaTime; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             UpdateCountdownText(timeRemaining);
         }
         else
@@ -42,6 +42,6 @@ public class CountdownTimer : MonoBehaviour
 
     public void GameOverNewGame()
     {
-        SceneManager.LoadScene("TimeOver");
+        SceneManager.LoadScene("ResultF");
     }
 }
