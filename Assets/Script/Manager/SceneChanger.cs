@@ -5,14 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
+    static int SceneCounter = 1;
     public void ChangeSNS()
     {
-        SceneManager.LoadScene("SNS");
-    }
-
-    public void ChangeWhiteBoard()
-    {
-        SceneManager.LoadScene("WhiteBoard");
+        if (SceneCounter >= 7)
+            SceneManager.LoadScene("Result");
+        
+        SceneManager.LoadScene($"SNS {SceneCounter}");
+        SceneCounter++;
+        
     }
 
     public void ChangeSubmit()
@@ -20,7 +21,7 @@ public class ChangeScene : MonoBehaviour
         SceneManager.LoadScene("Submit");
     }
 
-    public void GameOverNewGame()
+    public void Main()
     {
         SceneManager.LoadScene("Main");
     }
