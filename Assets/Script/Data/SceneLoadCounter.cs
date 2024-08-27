@@ -11,12 +11,25 @@ public class SceneLoadCounter : MonoBehaviour
     public int sceneLoadCount;
 
 
-    
+
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            // DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Debug.Log("SceneLoadCounter instance 이미 존재");
+            //Destroy(gameObject); // 이미 존재하는 싱글톤이 있다면 새로운 인스턴스를 파괴합니다.
+        }
+    }
 
+    // Start is called before the first frame update
+    void Start()
+    {
         if (SetSceneCount.Instance.IsInitialized == false)
         {
             int sceneLoadCount = PlayerPrefs.GetInt(SetSceneCount.SceneLoadCountKey, 0); // 초기화하는 함수는 메인화면의 SetSceneCount에
@@ -25,14 +38,8 @@ public class SceneLoadCounter : MonoBehaviour
             PlayerPrefs.SetInt(SetSceneCount.SceneLoadCountKey, sceneLoadCount);
             PlayerPrefs.Save();
             SetSceneCount.Instance.IsInitialized = true; // sns창에서 넘어가면 다시 false로 바꿔주는 방식으로 해야할 것 같음
-            OnCountInitialized?.Invoke();
+            OnCountInitialized?.Invoke(); // MessageGenerator에서 구독
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame

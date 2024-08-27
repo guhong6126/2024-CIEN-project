@@ -101,9 +101,9 @@ public class PictureGenerator : MonoBehaviour
         if (spriteName.Contains("cyber")) return Terror_methods.사이버테러;
         if (spriteName.Contains("bioterror")) return Terror_methods.바이오테러;
         if (spriteName.Contains("nuclear")) return Terror_methods.핵공격;
-        if (spriteName.Contains("sabotage")) return Terror_methods.사보타주;
+        //if (spriteName.Contains("sabotage")) return Terror_methods.사보타주;
 
-        return Terror_methods.사보타주; // 위에서 if문에 안 걸렸다면 오류니까 일단은 사보타주로 설정
+        return Terror_methods.인질극; // 위에서 if문에 안 걸렸다면 오류니까 일단은 인질극은로 설정
     }
 
     void SetRandomPicture()

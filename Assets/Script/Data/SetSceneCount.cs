@@ -8,7 +8,7 @@ public class SetSceneCount : MonoBehaviour
     public const string SceneLoadCountKey = "SceneLoadCount";
     public static SetSceneCount Instance { get; private set; } 
 
-    public bool IsInitialized { get; set; } = false;
+    public bool IsInitialized { get; set; } = false; //ÇÃ·¡±×
 
     private void Awake()
     {
@@ -21,7 +21,7 @@ public class SetSceneCount : MonoBehaviour
         {
             Destroy(gameObject); 
         }
-        IsInitialized = false;
+        // IsInitialized = false; 
     }
 
     private void Start()

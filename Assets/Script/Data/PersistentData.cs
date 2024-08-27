@@ -16,12 +16,12 @@ public enum Terror_scale
 public enum Terror_location
 {
     East, West, South, North, Center
+    //동부, 서부, 남부, 북부, 특별자치구
 }
 public enum Terror_methods
 {
-    인질극, 납치, 폭탄테러, 사이버테러, 바이오테러, 핵공격, 사보타주
-    //hostage, kidnapping, bomb, cyber, bioterror, nuclear, sabotage
-    // 대규모일 경우 게시물에 거짓으로 나타낼 방법을 추가해야 함 (테스트를 위해 임시로 sabotage 추가해둠)
+    인질극, 납치, 폭탄테러, 사이버테러, 바이오테러, 핵공격
+    //hostage, kidnapping, bomb, cyber, bioterror, nuclear
 }
 
 public class PersistentData : MonoBehaviour
