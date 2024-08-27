@@ -132,6 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 165248658}
   - component: {fileID: 165248657}
+  - component: {fileID: 165248659}
   m_Layer: 0
   m_Name: ClickObject
   m_TagString: Untagged
@@ -166,6 +167,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &165248659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165248656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ddf35140898b5f4a994232ee29da150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &941575897
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,6 +594,18 @@ MonoBehaviour:
       - m_Target: {fileID: 165248657}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
         m_MethodName: ChangeSNS
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 165248659}
+        m_TargetAssemblyTypeName: SuccessCounter, Assembly-CSharp
+        m_MethodName: Failed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
