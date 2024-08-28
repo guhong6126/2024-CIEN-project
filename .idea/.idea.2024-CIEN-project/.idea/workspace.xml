@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="464504a5-6929-478e-969f-80af8f04ab88" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.2024-CIEN-project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2024-CIEN-project/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SNS 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SNS 1.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SNS 2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SNS 2.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SNS 2.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SNS 2.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SNS 3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SNS 3.unity" afterDir="false" />
@@ -18,9 +20,9 @@
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SNS 6.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SNS 6.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SNS 7.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SNS 7.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SNS 7.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SNS 7.unity.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/SceneChanger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Manager/SceneChanger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/SuccessCounter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/SuccessCounter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Video.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Video.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/NotoSansKR-Medium SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/NotoSansKR-Medium SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
