@@ -26,4 +26,12 @@ public class ChangeScene : MonoBehaviour
         PersistentData.Instance = null;
         SceneManager.LoadScene("Main");
     }
+    
+    public void goSNS1()
+    {
+        SceneCounter = 1;
+        SuccessCounter.counter = 0;
+        Managers.ClearStringList();
+        SceneManager.LoadScene("SNS 1");
+    }
 }

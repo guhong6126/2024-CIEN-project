@@ -5,7 +5,7 @@ using TMPro;  // TextMeshPro 네임스페이스 추가
 
 public class SuccessCounter : MonoBehaviour
 {
-    static int counter = 0;
+    public static int counter = 0;
     public TextMeshProUGUI tmpCounterText = null;  // TMP 텍스트 객체 참조 추가
     public TextMeshProUGUI tmpGradeText = null;    // 등급을 표시할 TMP 텍스트 객체 참조 추가
 

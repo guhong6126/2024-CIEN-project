@@ -50,4 +50,10 @@ public class Managers : MonoBehaviour
     {
         StringList.Add(item);
     }
+
+    // 리스트를 비우는 메서드
+    public static void ClearStringList()
+    {
+        StringList.Clear();
+    }
 }
