@@ -68,6 +68,12 @@ public class PictureIndex : MonoBehaviour
                
 
         spriteInfos = new List<SpriteInfo>();
+        
+
+        if (MessageGenerator.Instance.post_list[p_index] != Integrity.속보)
+        {
+            sprites = sprites.Where(sprite => sprite.name != "breaking").ToArray(); //속보용 이미지 지우기
+        }
 
         foreach (var sprite in sprites)
         {
@@ -107,8 +113,6 @@ public class PictureIndex : MonoBehaviour
         }
         else //속보가 아닐 경우
         {
-            sprites = sprites.Where(sprite => sprite.name != "breaking").ToArray();
-
             // 사진이 거짓인 게시물일 경우
             if (MessageGenerator.Instance.post_list[p_index] == Integrity.거짓 && MessageGenerator.Instance.p_false_elts[p_index] == FalseElements.picture)
             {
