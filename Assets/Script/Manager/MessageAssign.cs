@@ -65,6 +65,11 @@ public class MessageAssign : MonoBehaviour
             if (canvasGroup != null)
             {
                 canvasGroup.alpha = 1; // 보이게 설정
+                
+            }
+            if (objs[i].CompareTag("SNSmessage"))
+            {
+                objs[i].transform.SetSiblingIndex(0);
             }
         }
     }
