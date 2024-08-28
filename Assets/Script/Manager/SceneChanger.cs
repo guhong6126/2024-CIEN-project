@@ -23,6 +23,7 @@ public class ChangeScene : MonoBehaviour
 
     public void Main()
     {
+        PersistentData.Instance = null;
         SceneManager.LoadScene("Main");
     }
 }
