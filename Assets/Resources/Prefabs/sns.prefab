@@ -182,6 +182,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageComponent: {fileID: 0}
+  p_index: 0
+  sprites: []
 --- !u!1 &5069892489917954959
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +218,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 26.708, y: 108.8}
+  m_AnchoredPosition: {x: 26.708, y: 114.1}
   m_SizeDelta: {x: 455.816, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3178598676784420392
@@ -274,8 +276,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -350,7 +352,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -58.593834, y: 147.4}
+  m_AnchoredPosition: {x: -58.593834, y: 159.9}
   m_SizeDelta: {x: 285.0123, y: 30.6926}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3534710497240379973
