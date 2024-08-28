@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-    static int SceneCounter = 1;
+    public static int SceneCounter = 1;
     public void ChangeSNS()
     {
         if (SceneCounter >= 7)

@@ -24,7 +24,7 @@ public class MessageGenerator : MonoBehaviour
     public delegate void DataInitializedHandler();
     public event DataInitializedHandler OnDataInitialized;
     public bool IsInitialized { get; private set; } = false;
-    private bool isSubscribed = false;
+    //private bool isSubscribed = false;
 
     public static MessageGenerator Instance;
     public Integrity real_integrity;
@@ -90,7 +90,7 @@ public class MessageGenerator : MonoBehaviour
             //Debug.Log("instance 이미 존재");
             //Destroy(gameObject); //근데 이러면 ... 하나만 잘 있는데도 삭제하던데 
         }
-        isSubscribed = false;
+        //isSubscribed = false;
     }
 
     void Start()
@@ -122,30 +122,30 @@ public class MessageGenerator : MonoBehaviour
     }
     private IEnumerator WaitForSceneLoadCounter()
     {
-        // 인스턴스가 생성될 때까지 대기
-        while (SceneLoadCounter.Instance == null || !SetSceneCount.Instance.IsInitialized)
+        // 혹시 모르니 대기
+        while (ChangeScene.SceneCounter == null)
         {
             //if(SceneLoadCounter.Instance == null) { Debug.Log("SceneLoadCounter.Instance == null"); }
             // if (!SetSceneCount.Instance.IsInitialized) { Debug.Log("!SetSceneCount.Instance.IsInitialized"); }
 
             yield return null; // 프레임 대기
         }
-        if (!isSubscribed)
-        {
-            isSubscribed = true;
-            SceneLoadCounter.Instance.OnCountInitialized += OnCountInitialized;
-            OnCountInitialized();
-        }
+        //if (!isSubscribed)
+        //{
+        //    isSubscribed = true;
+        //    SceneLoadCounter.Instance.OnCountInitialized += OnCountInitialized;
+        //    OnCountInitialized();
+        //}
+        OnCountInitialized();
 
-        
     }
 
     private void OnCountInitialized()
     {
-        int sceneLoadCount = PlayerPrefs.GetInt(SetSceneCount.SceneLoadCountKey, 0);
-        Debug.Log($"STG Count: {sceneLoadCount}");
+        //int sceneLoadCount = PlayerPrefs.GetInt(SetSceneCount.SceneLoadCountKey, 0);
+        //Debug.Log($"STG Count: {sceneLoadCount}");
         // 스테이지마다 적용할 거
-        (int num_of_true, int num_breaking) = SetAuthRatio(sceneLoadCount);
+        (int num_of_true, int num_breaking) = SetAuthRatio(ChangeScene.SceneCounter);
         Debug.Log($"true: {num_of_true}개, 속보: {num_breaking}번째");
         post_list = IntegrityRatio(num_of_true, num_breaking); // 참거짓 여부를 담은 리스트
 
@@ -377,10 +377,10 @@ public class MessageGenerator : MonoBehaviour
     private void OnDestroy()
     {
         // 이벤트 구독 해제
-        if (SceneLoadCounter.Instance != null)
-        {
-            isSubscribed = false;
-            SceneLoadCounter.Instance.OnCountInitialized -= OnCountInitialized;
-        }
+        //if (SceneLoadCounter.Instance != null)
+        //{
+        //    isSubscribed = false;
+        //    SceneLoadCounter.Instance.OnCountInitialized -= OnCountInitialized;
+        //}
     }
 }
