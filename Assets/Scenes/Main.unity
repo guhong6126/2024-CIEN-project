@@ -538,7 +538,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 397130782}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: ChangeSNS
+        m_MethodName: goSNS1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
