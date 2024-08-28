@@ -4,6 +4,7 @@ using UnityEditor.VersionControl;
 using UnityEngine;
 using System.Linq;
 using static UnityEditor.FilePathAttribute;
+using UnityEngine.SceneManagement;
 
 
 public enum Integrity
@@ -24,6 +25,7 @@ public class MessageGenerator : MonoBehaviour
     public delegate void DataInitializedHandler();
     public event DataInitializedHandler OnDataInitialized;
     public bool IsInitialized { get; private set; } = false;
+    private int scenecounter;
     //private bool isSubscribed = false;
 
     public static MessageGenerator Instance;
@@ -94,6 +96,31 @@ public class MessageGenerator : MonoBehaviour
         // 새로 생성된 인스턴스를 Instance로 설정
         Instance = this;
         //isSubscribed = false;
+
+        //scenecounter = ChangeScene.SceneCounter;
+        //if (SceneManager.GetActiveScene().name == "SNS 1" && scenecounter !=1)
+        //{
+        //    Debug.LogWarning("조졌다"); 
+        //}
+
+        // 현재 씬 이름을 가져오기
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        // 씬 이름의 마지막 글자 가져오기
+        char lastChar = sceneName[sceneName.Length - 1];
+
+        // 마지막 글자가 숫자인지 확인하고 int로 변환해서 비교한 뒤
+        //if (char.IsDigit(lastChar) && int.Parse(lastChar.ToString()) != scenecounter) //값이 다르면
+        //{
+        //    scenecounter = int.Parse(lastChar.ToString()); // 현재 씬 이름의 숫자로 값 변경
+        //}
+        //생각해보니 이럴 거면 아싸리 첨부터 끝글자로 맞추면 되는 거 아님? ㄹㅈㄷ사고력
+
+        if (char.IsDigit(lastChar))
+        {
+            scenecounter = int.Parse(lastChar.ToString()); // 현재 씬 이름의 숫자로 값 변경
+        }
+
     }
 
     void Start()
@@ -150,7 +177,7 @@ public class MessageGenerator : MonoBehaviour
         //int sceneLoadCount = PlayerPrefs.GetInt(SetSceneCount.SceneLoadCountKey, 0);
         //Debug.Log($"STG Count: {sceneLoadCount}");
         // 스테이지마다 적용할 거
-        (int num_of_true, int num_breaking) = SetAuthRatio(ChangeScene.SceneCounter);
+        (int num_of_true, int num_breaking) = SetAuthRatio(scenecounter);
         Debug.Log($"true: {num_of_true}개, 속보: {num_breaking}번째");
         post_list = IntegrityRatio(num_of_true, num_breaking); // 참거짓 여부를 담은 리스트
 
@@ -285,8 +312,6 @@ public class MessageGenerator : MonoBehaviour
                 falseEltsList.Remove(FalseElements.methods);
             }
             false_elt = falseEltsList[Random.Range(0, falseEltsList.Count)];
-            Debug.Log($"가짜요소: {false_elt}"); // ㅅㅍ 왜 이게 출력이 안 되지
-
             //Debug.Log($"거짓 항목: {false_elt}");
         }
 
