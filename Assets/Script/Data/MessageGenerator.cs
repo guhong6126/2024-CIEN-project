@@ -38,12 +38,25 @@ public class MessageGenerator : MonoBehaviour
     public List<string> printed_messages;
     public List<Terror_location> m_locations;
     public List<Terror_methods> m_methods;
+    public List<FalseElements> p_false_elts;
 
     private List<string> messages = new List<string>
     {
-        "{0}에서 {1} 하는 테러 집단 봄..ㄷㄷ 뭐임? 모래시계 같은데",
-        "나 지금 {0}인데 {1} 하는 장면 목격한 것 같음... 개무섭다;",
-        "혹시 이거 {1} 하는 거 맞나요? 지금 {0}인데 걱정 되네요..."
+        //"{0}에서 {1} 하는 테러 집단 봄..ㄷㄷ 뭐임? 모래시계 같은데",
+        //"나 지금 {0}인데 {1} 하는 장면 목격한 것 같음... 개무섭다;",
+        //"혹시 이거 {1} 하는 거 맞나요? 지금 {0}인데 걱정 되네요...",
+
+        "긴급: 방금 {0}에서 의심스러운 행동을 보이는 인물을 목격했습니다. {1} 같은데, 주위 사람들에게 위협적인 태도를 보이고 있어요. 혹시 이 지역에 계신 분들은 안전을 위해 대피하시고, 경찰에 신고해 주세요!",
+        "{0}에서 불안정한 상태의 남성을 봤어. {1}에 쓰일 것 같은 물건을 가지고 있다고. 지금 당장 현장에서 벗어나!!",
+        "{0}에서 눈에 띄게 수상한 사람이 거리를 배회하고 있습니다. 뭔가 큰 가방을 메고 다니며 {1}용 무기들을 주위에 놓는 듯합니다. 현장에 있지 마시고, 즉시 신고하세요!",
+        "{0}에 위치한 거리인데, 저거 테러리스트 아니야?! {1}를 일으키려나 봐! 당장 이 지역에서 벗어나고, 경찰에 신고해!",
+        "{0}에서 위험해 보이는 인물을 발견했습니다. 회색 후드티를 입고 얼굴을 가린 채 {1}에 쓰일 법한 들고 있어요. 이 지역에 계신 분들은 주의하시고 가능한 한 빨리 대피하세요.",
+        "{0}에서 수상한 인물 발견. {1}라도 일으키는 거 아니야?! 바로 신고해야 해!",
+        "{0}에서 불안해 보이는 사람 목격. 손에 들고 있는 저거, {1}라도 일으키려는 것 같은데. 혹시 모르니 신고 부탁.",
+        "빨리 알려야 해: {0}에서 테러리스트 의심되는 인물 봄. 진짜 수상해서 그래. 저거 {1}에 쓰이는 물건 아니야? 당장 벗어나야 해. 경찰에 연락 중.",
+        "이상 상황: {0}에서 {1}에 쓰일 것 같은 물건 들고 위협적인 행동 보이는 인물 있음. 빨리 이 지역 떠나고, 누군가는 경찰에 신고해야 해!",
+        "{0}에서 {1} 일어날 것 같아요. 여기 계시는 분들은 최대한 빨리 그 지역에서 벗어나세요."
+
     };
     private List<string> news = new List<string>
     {
@@ -52,10 +65,12 @@ public class MessageGenerator : MonoBehaviour
     };
     private List<string> nicknames = new List<string>
     {
-        "고라니","안졸리나젤리","붕방붕","화양연화","고랭이","라단조","물붓기시험","수마트라섬","지구가까운점","소망",
-        "니르","삐걱","여흘여흘","뚱싯뚱싯","흐르르흐르르","어처구니없는","누쀠","채레","퐈크퓨","몽땅",
-        "인공눈물","믿기마우스","진진자라","펭귄","읽씹백천만","무더위","이조명온도습도","듄듄","고영희",
-        "Sodium","Kitsch","rizz","fratty","JellyBeans","Limited_Edition","Math_","英吉利","倫敦","bandit"
+        "Antonio Bonilla", "Marisol Jarvis", "Carter Ramirez", "Edwin Stone", "Matt Raymond",
+        "Roger Oconnor", "Angel Wise", "Eloise Chambers", "Shauna Saunders", "Hester Schaefer",
+        "Loraine Wolf", "Rex Carter", "Angel Cantu", "Jacques Camacho", "Jami Pittman",
+        "Mandy Lindsey", "Reba Pacheco", "Hilton Trujillo", "Leann Reese", "Bettie Rios",
+        "Michele Wall", "Man Chandler", "Tabitha Welch", "Maricela Hill", "Peter Thornton",
+        "Marcellus Nguyen", "Darin Patterson", "Mariana Golden", "Burl Abbott", "Kimberley Bray"
     };
     private List<string> presses = new List<string>
     {
@@ -101,6 +116,7 @@ public class MessageGenerator : MonoBehaviour
         post_list = new List<Integrity>();
         m_locations = new List<Terror_location>();
         m_methods = new List<Terror_methods>();
+        p_false_elts = new List<FalseElements>();
 
         StartCoroutine(WaitForSceneLoadCounter());
     }
@@ -250,6 +266,7 @@ public class MessageGenerator : MonoBehaviour
 
         Terror_location location = persistentData.current_location;
         Terror_methods m_method = Terror_methods.인질극;
+        false_elt = FalseElements.location;
 
         string selected_message = messages[Random.Range(0, messages.Count)]; // 게시물 멘트 랜덤 선택
 
@@ -263,6 +280,7 @@ public class MessageGenerator : MonoBehaviour
                 falseEltsList.Remove(FalseElements.methods);
             }
             false_elt = falseEltsList[Random.Range(0, falseEltsList.Count)];
+
             //Debug.Log($"거짓 항목: {false_elt}");
         }
 
@@ -314,6 +332,7 @@ public class MessageGenerator : MonoBehaviour
         printed_messages.Add(printed_message);
         m_locations.Add(location); 
         m_methods.Add(m_method);
+        p_false_elts.Add(false_elt);
     }
 
     /// <summary>
@@ -351,6 +370,7 @@ public class MessageGenerator : MonoBehaviour
 
         m_locations.Add(persistentData.current_location);
         m_methods.Add(Terror_methods.인질극);
+        p_false_elts.Add(FalseElements.location);
 
     }
 

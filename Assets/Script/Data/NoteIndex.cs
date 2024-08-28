@@ -62,7 +62,7 @@ public class NoteIndex : MonoBehaviour
         //}
         // MessageGenerator 인스턴스가 존재할 때 이벤트 구독
         MessageGenerator.Instance.OnDataInitialized += OnDataInitialized;
-        Debug.Log("NTID 이벤트 호출 ㄱㄱ");  //얘는 왜 포스트잇이 생성된 이후에 호출되는 걸까 -> 포스트잇 오브젝트가 화이트보드 버튼을 클릭하기 전까지는 비활성화 상태라서 Awake가 실행되지 않기 때문.. 인 것 같은데 그럼 왜 밑에 Index 코드는 잘 작동하는 거지?? >> 외부에서 값을 미리 할당해놔서 ㅇㅋ 그러면 밑 코드를 따로 빼보자
+        //Debug.Log("NTID 이벤트 호출 ㄱㄱ");  //얘는 왜 포스트잇이 생성된 이후에 호출되는 걸까 -> 포스트잇 오브젝트가 화이트보드 버튼을 클릭하기 전까지는 비활성화 상태라서 Awake가 실행되지 않기 때문.. 인 것 같은데 그럼 왜 밑에 Index 코드는 잘 작동하는 거지?? >> 외부에서 값을 미리 할당해놔서 ㅇㅋ 그러면 밑 코드를 따로 빼보자
         OnDataInitialized();
     }
 
