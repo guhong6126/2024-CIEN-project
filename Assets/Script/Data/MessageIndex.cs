@@ -12,8 +12,8 @@ public class MessageIndex : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nicknameText = transform.Find("nicknameText").GetComponent<TextMeshProUGUI>();
-        contentsText = transform.Find("contentsText").GetComponent<TextMeshProUGUI>();
+        nicknameText = transform.Find("username").GetComponent<TextMeshProUGUI>();
+        contentsText = transform.Find("message").GetComponent<TextMeshProUGUI>();
 
         if (nicknameText == null)
         {

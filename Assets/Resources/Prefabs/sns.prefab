@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2835838393560953508}
   - component: {fileID: 8672972631983231765}
+  - component: {fileID: 888816357549946554}
   - component: {fileID: 4359067113158465800}
   m_Layer: 5
   m_Name: sns
-  m_TagString: Untagged
+  m_TagString: SNSmessage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,6 +49,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346920336944370143}
   m_CullTransparentMesh: 1
+--- !u!114 &888816357549946554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346920336944370143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35aa8c2f2e6b557409428e9fa5ce613c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
 --- !u!114 &4359067113158465800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,6 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7747889870100144424}
   - component: {fileID: 6814512778499721389}
+  - component: {fileID: 5901045931417216672}
   - component: {fileID: 4381304103730499982}
   m_Layer: 5
   m_Name: picture
@@ -123,6 +138,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3715737467200167382}
   m_CullTransparentMesh: 1
+--- !u!114 &5901045931417216672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3715737467200167382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04b6d6121f1eff041befc8275367b403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  real_integrity: 0
+  false_elt: 0
+  imageComponent: {fileID: 0}
 --- !u!114 &4381304103730499982
 MonoBehaviour:
   m_ObjectHideFlags: 0
