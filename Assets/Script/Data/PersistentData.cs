@@ -36,16 +36,16 @@ public class PersistentData : MonoBehaviour
     private void Awake()
     {
         // 싱글톤 인스턴스 초기화
-        if (Instance == null)
+        if (Instance == null || Instance != this)
         {
             Instance = this;
             SetCurrentScale();
             SetCurrentTLocation();
-            DontDestroyOnLoad(gameObject);  // 씬 전환 시에도 인스턴스가 파괴되지 않도록 설정
+            DontDestroyOnLoad(gameObject);  // 씬 전환 시에도 인스턴스가 파괴되지 않도록 설정 
         }
         else
         {
-            Destroy(gameObject);  // 이미 인스턴스가 존재하면 새로운 객체를 파괴
+            //Destroy(gameObject);  // 이미 인스턴스가 존재하면 새로운 객체를 파괴
         }
     }
     /// <summary>

@@ -80,16 +80,19 @@ public class MessageGenerator : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        if (Instance != null && Instance != this)
         {
-            Instance = this;
-            // DontDestroyOnLoad(gameObject);
+            // 기존의 인스턴스가 있으면 그 인스턴스를 파괴
+            Destroy(Instance.gameObject);
+            IsInitialized = false;
         }
-        else
-        {
-            //Debug.Log("instance 이미 존재");
-            //Destroy(gameObject); //근데 이러면 ... 하나만 잘 있는데도 삭제하던데 
-        }
+        //if (Instance == null || Instance != this)
+        //{
+        //    Instance = this;
+        //}
+        
+        // 새로 생성된 인스턴스를 Instance로 설정
+        Instance = this;
         //isSubscribed = false;
     }
 
@@ -118,28 +121,29 @@ public class MessageGenerator : MonoBehaviour
         m_methods = new List<Terror_methods>();
         p_false_elts = new List<FalseElements>();
 
-        OnCountInitialized();
+        StartCoroutine(WaitForSceneLoadCounter());
+        //OnCountInitialized();
     }
 
-    //private IEnumerator WaitForSceneLoadCounter()
-    //{
-    //    // 초기화 될 때까지 대기
-    //    //while (SceneLoadCounter.Instance == null || !SetSceneCount.Instance.IsInitialized)
-    //    //{
-    //    //    //if(SceneLoadCounter.Instance == null) { Debug.Log("SceneLoadCounter.Instance == null"); }
-    //    //    // if (!SetSceneCount.Instance.IsInitialized) { Debug.Log("!SetSceneCount.Instance.IsInitialized"); }
+    private IEnumerator WaitForSceneLoadCounter()
+    {
+        // 초기화 될 때까지 대기
+        while (IsInitialized==true)
+        {
+            //if(SceneLoadCounter.Instance == null) { Debug.Log("SceneLoadCounter.Instance == null"); }
+            // if (!SetSceneCount.Instance.IsInitialized) { Debug.Log("!SetSceneCount.Instance.IsInitialized"); }
 
-    //    //    yield return null; // 프레임 대기
-    //    //}
-    //    //if (!isSubscribed)
-    //    //{
-    //    //    isSubscribed = true;
-    //    //    SceneLoadCounter.Instance.OnCountInitialized += OnCountInitialized;
-    //    //    OnCountInitialized();
-    //    //}
-    //    OnCountInitialized();
+            yield return null; // 프레임 대기
+        }
+        //if (!isSubscribed)
+        //{
+        //    isSubscribed = true;
+        //    SceneLoadCounter.Instance.OnCountInitialized += OnCountInitialized;
+        //    OnCountInitialized();
+        //}
+        OnCountInitialized();
 
-    //}
+    }
 
     private void OnCountInitialized()
     {
@@ -155,7 +159,7 @@ public class MessageGenerator : MonoBehaviour
         {
             if (elt != Integrity.속보)
             {
-                SetRandomMessage();
+                SetRandomMessage(elt);
             }
             else
             {
@@ -261,7 +265,7 @@ public class MessageGenerator : MonoBehaviour
     /// <summary>
     /// 랜덤 게시물을 생성하는 함수 (지금은 Debug.Log로 출력하지만 UI에 출력되게 바꿔야 함)
     /// </summary>
-    void SetRandomMessage()
+    void SetRandomMessage(Integrity real_integrity)
     {
         string printed_message = string.Empty; // 출력할 메시지(아직은 empty)
 
@@ -281,6 +285,7 @@ public class MessageGenerator : MonoBehaviour
                 falseEltsList.Remove(FalseElements.methods);
             }
             false_elt = falseEltsList[Random.Range(0, falseEltsList.Count)];
+            Debug.Log($"가짜요소: {false_elt}"); // ㅅㅍ 왜 이게 출력이 안 되지
 
             //Debug.Log($"거짓 항목: {false_elt}");
         }

@@ -41,6 +41,8 @@ public class MessageAssign : MonoBehaviour
             }
 
             canvasGroup.alpha = 0; // 안 보이게 설정
+            canvasGroup.interactable = false; // 상호작용 불가
+            canvasGroup.blocksRaycasts = false; // 마우스 클릭 등 차단
             note.GetComponent<NoteIndex>().index = System.Array.IndexOf(notes, note);
         }
 
@@ -67,6 +69,11 @@ public class MessageAssign : MonoBehaviour
                 canvasGroup.alpha = 1; // 보이게 설정
                 
             }
+            if (objs[i].CompareTag("Notes"))
+            {
+                canvasGroup.interactable = true;
+                canvasGroup.blocksRaycasts = true;
+            }
             if (objs[i].CompareTag("SNSmessage"))
             {
                 objs[i].transform.SetSiblingIndex(0);
@@ -80,21 +87,21 @@ public class MessageAssign : MonoBehaviour
         StopAllCoroutines(); // 코루틴 중지
 
         // 오브젝트 배열 정리
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("SNSmessage");
-        GameObject[] notes = Resources.FindObjectsOfTypeAll<GameObject>()
-            .Where(obj => obj.CompareTag("Notes") && obj.name.StartsWith("WhiteboardImage ("))
-            .ToArray();
+        //GameObject[] objs = GameObject.FindGameObjectsWithTag("SNSmessage");
+        //GameObject[] notes = Resources.FindObjectsOfTypeAll<GameObject>()
+        //    .Where(obj => obj.CompareTag("Notes") && obj.name.StartsWith("WhiteboardImage ("))
+        //    .ToArray();
 
-        // 모든 오브젝트를 파괴
-        foreach (GameObject obj in objs)
-        {
-            Destroy(obj);
-        }
+        //모든 오브젝트를 파괴
+        //foreach (GameObject obj in objs)
+        //{
+        //    Destroy(obj);
+        //}
 
-        foreach (GameObject note in notes)
-        {
-            Destroy(note);
-        }
+        //foreach (GameObject note in notes)
+        //{
+        //    Destroy(note);
+        //}
     }
 
     // Update is called once per frame

@@ -57,9 +57,9 @@ public class NoteAssign : MonoBehaviour
         StopAllCoroutines(); // 코루틴 중지
 
         // 모든 오브젝트를 파괴
-        foreach (GameObject note in notes)
-        {
-            Destroy(note);
-        }
+        //foreach (GameObject note in notes)
+        //{
+        //    Destroy(note);
+        //}
     }
 }
