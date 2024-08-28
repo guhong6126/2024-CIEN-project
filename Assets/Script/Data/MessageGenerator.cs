@@ -118,27 +118,28 @@ public class MessageGenerator : MonoBehaviour
         m_methods = new List<Terror_methods>();
         p_false_elts = new List<FalseElements>();
 
-        StartCoroutine(WaitForSceneLoadCounter());
-    }
-    private IEnumerator WaitForSceneLoadCounter()
-    {
-        // 혹시 모르니 대기
-        while (ChangeScene.SceneCounter == null)
-        {
-            //if(SceneLoadCounter.Instance == null) { Debug.Log("SceneLoadCounter.Instance == null"); }
-            // if (!SetSceneCount.Instance.IsInitialized) { Debug.Log("!SetSceneCount.Instance.IsInitialized"); }
-
-            yield return null; // 프레임 대기
-        }
-        //if (!isSubscribed)
-        //{
-        //    isSubscribed = true;
-        //    SceneLoadCounter.Instance.OnCountInitialized += OnCountInitialized;
-        //    OnCountInitialized();
-        //}
         OnCountInitialized();
-
     }
+
+    //private IEnumerator WaitForSceneLoadCounter()
+    //{
+    //    // 초기화 될 때까지 대기
+    //    //while (SceneLoadCounter.Instance == null || !SetSceneCount.Instance.IsInitialized)
+    //    //{
+    //    //    //if(SceneLoadCounter.Instance == null) { Debug.Log("SceneLoadCounter.Instance == null"); }
+    //    //    // if (!SetSceneCount.Instance.IsInitialized) { Debug.Log("!SetSceneCount.Instance.IsInitialized"); }
+
+    //    //    yield return null; // 프레임 대기
+    //    //}
+    //    //if (!isSubscribed)
+    //    //{
+    //    //    isSubscribed = true;
+    //    //    SceneLoadCounter.Instance.OnCountInitialized += OnCountInitialized;
+    //    //    OnCountInitialized();
+    //    //}
+    //    OnCountInitialized();
+
+    //}
 
     private void OnCountInitialized()
     {
