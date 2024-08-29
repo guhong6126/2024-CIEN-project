@@ -242,7 +242,7 @@ public class MessageGenerator : MonoBehaviour
     {
         //Debug.Log($"받은 인자: {num}");
         int n_true, n_brk;
-        n_true = 19 - num * 2; // 예시임 비율은 기획한테 물어보기
+        n_true = 11 - num; // 19개 중 10, 9, 8, 7, 6, 5, 4 개만 참
         n_brk = 5 + (num - 1) * 2;
         return (n_true, n_brk);
     }
