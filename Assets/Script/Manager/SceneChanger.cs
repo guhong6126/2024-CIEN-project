@@ -9,7 +9,7 @@ public class ChangeScene : MonoBehaviour
 
     public void ChangeSNS()
     {
-        if (SceneCounter >= 7)
+        if (SceneCounter > 7)
         {
             SceneManager.LoadScene("Result");
         }
