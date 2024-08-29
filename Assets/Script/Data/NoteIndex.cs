@@ -127,7 +127,7 @@ public class NoteIndex : MonoBehaviour
 
         if (m_integrity == Integrity.속보)
         {
-            contentText.text = $"속보\n⌛ = {m_scale}규모";
+            contentText.text = $"속보\n모래시계 = {m_scale}규모";
         }
         else
         {

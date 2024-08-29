@@ -24,7 +24,7 @@ public class PictureIndex : MonoBehaviour
     public Image imageComponent;
     public int p_index;
     public Sprite[] sprites;
-    public List<SpriteInfo> spriteInfos;
+    public List<SpriteInfo> spriteInfos; // SpriteInfo들을 담을 리스트 (여기서 랜덤으로 선택할 거임)
 
     // Start is called before the first frame update
     void Start()
@@ -138,7 +138,7 @@ public class PictureIndex : MonoBehaviour
                 }
                 else //남은 게 방법이 거짓인 경우인가? 이 경우에 참인 방법을 써야 함? 거짓인 방법에 맞춰서 사진을 띄워야 함? -> 걍 랜덤으로 출력
                 {
-                    // candidateSprites = spriteInfos.FindAll(spriteInfo => spriteInfo.isSandglass && PersistentData.Instance.current_methods.Contains(spriteInfo.methodName));
+                    candidateSprites = spriteInfos.FindAll(spriteInfo => spriteInfo.isSandglass && PersistentData.Instance.current_methods.Contains(spriteInfo.methodName));
                     candidateSprites = spriteInfos;
                 }
             }
@@ -150,7 +150,7 @@ public class PictureIndex : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("No suitable sprite found.");
+                Debug.LogWarning("No suitable sprite found."); //이거 걸리면 오열하셈
             }
 
         }
