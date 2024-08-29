@@ -7,15 +7,29 @@
     <list default="true" id="464504a5-6929-478e-969f-80af8f04ab88" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.2024-CIEN-project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2024-CIEN-project/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Settings/UniversalRP.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Settings/UniversalRP.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Result.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Result.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ResultF.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ResultF.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ResultT.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ResultT.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SNS 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SNS 1.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SNS 2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SNS 2.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SNS 2.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SNS 2.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SNS 3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SNS 3.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SNS 3.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SNS 3.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SNS 4.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SNS 4.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SNS 4.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SNS 4.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SNS 5.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SNS 5.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SNS 5.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SNS 5.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SNS 6.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SNS 6.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SNS 6.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SNS 6.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SNS 7.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SNS 7.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SNS 7.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SNS 7.unity.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Submit 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Submit 1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Submit.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Submit.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Video.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Video.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Data/MessageGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Data/MessageGenerator.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Manager/SceneChanger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Manager/SceneChanger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/UI/ImageClick.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UI/ImageClick.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +51,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "round",
+    "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -46,6 +60,14 @@
   }
 }]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/build/CienUnity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\redci\OneDrive\바탕 화면\GitHub\2024-CIEN-project\build" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.36f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;C:\Users\redci\OneDrive\바탕 화면\GitHub\2024-CIEN-project&quot; -debugCodeOptimization" />
@@ -94,6 +116,7 @@
       <workItem from="1724631626291" duration="45000" />
       <workItem from="1724753875578" duration="11000" />
       <workItem from="1724929543258" duration="1535000" />
+      <workItem from="1724931792320" duration="1025000" />
     </task>
     <servers />
   </component>

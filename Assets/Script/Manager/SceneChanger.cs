@@ -38,4 +38,9 @@ public class ChangeScene : MonoBehaviour
         Managers.ClearStringList();
         SceneManager.LoadScene("SNS 1");
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

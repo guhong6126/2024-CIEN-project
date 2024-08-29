@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-using static UnityEditor.FilePathAttribute;
 
 public class ImageClick : MonoBehaviour, IPointerClickHandler
 {
