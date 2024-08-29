@@ -303,14 +303,47 @@ public class MessageGenerator : MonoBehaviour
         // 가짜로 적을 항목 랜덤 선택
         if (real_integrity == Integrity.거짓)
         {
-            FalseElements[] false_elts = (FalseElements[])System.Enum.GetValues(typeof(FalseElements));
-            var falseEltsList = new List<FalseElements>(false_elts);
-            if (persistentData.current_scale == Terror_scale.대)
-            {
-                falseEltsList.Remove(FalseElements.methods);
-            }
-            false_elt = falseEltsList[Random.Range(0, falseEltsList.Count)];
+            // ㄹㅇ로 랜덤으로 선택
+            //FalseElements[] false_elts = (FalseElements[])System.Enum.GetValues(typeof(FalseElements));
+            //var falseEltsList = new List<FalseElements>(false_elts);
+            //if (persistentData.current_scale == Terror_scale.대)
+            //{
+            //    falseEltsList.Remove(FalseElements.methods);
+            //}
+            //false_elt = falseEltsList[Random.Range(0, falseEltsList.Count)];
             //Debug.Log($"거짓 항목: {false_elt}");
+
+            // 정해진 확률로 선택
+            float randValue = Random.Range(0.0f, 1.0f);
+
+            if(persistentData.current_scale == Terror_scale.대)
+            {
+                if (randValue < 0.6f)
+                {
+                    false_elt = FalseElements.location; // 60% 확률로 위치를 거짓 항목으로 선택
+                }
+                else
+                {
+                    false_elt = FalseElements.picture; // 40% 확률로 사진을 거짓 항목으로 선택
+                }
+            }
+            else
+            {
+                if (randValue < 0.4f)
+                {
+                    false_elt = FalseElements.location; // 40% 확률로 위치를 거짓 항목으로 선택
+                }
+                else if (randValue < 0.8f)
+                {
+                    false_elt = FalseElements.methods; // 40% 확률로 방법을 거짓 항목으로 선택
+                }
+                else
+                {
+                    false_elt = FalseElements.picture; // 20% 확률로 사진을 거짓 항목으로 선택
+                }
+            }
+
+
         }
 
         // 닉네임도 뽑아야 함...
@@ -363,6 +396,8 @@ public class MessageGenerator : MonoBehaviour
         m_methods.Add(m_method);
         p_false_elts.Add(false_elt);
     }
+
+
 
     /// <summary>
     /// 속보 문구를 생성하는 함수
