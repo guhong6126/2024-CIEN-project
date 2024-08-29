@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="464504a5-6929-478e-969f-80af8f04ab88" name="Changes" comment="" />
+    <list default="true" id="464504a5-6929-478e-969f-80af8f04ab88" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.2024-CIEN-project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2024-CIEN-project/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Result.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Result.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ResultF.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ResultF.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ResultT.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ResultT.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Submit 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Submit 1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Submit.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Submit.unity" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,6 +33,8 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "round",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
@@ -79,6 +88,7 @@
       <updated>1724631623733</updated>
       <workItem from="1724631626291" duration="45000" />
       <workItem from="1724753875578" duration="11000" />
+      <workItem from="1724929543258" duration="671000" />
     </task>
     <servers />
   </component>
