@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 7747889870100144424}
   - component: {fileID: 6814512778499721389}
   - component: {fileID: 4381304103730499982}
-  - component: {fileID: 4046950868565373711}
+  - component: {fileID: 2184912035293468810}
   m_Layer: 5
   m_Name: picture
   m_TagString: Picture
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4046950868565373711
+--- !u!114 &2184912035293468810
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,12 +178,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3715737467200167382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcbbb580302220947b3a8ec26319e972, type: 3}
+  m_Script: {fileID: 11500000, guid: 3cf635ad162752a48a26e003431f57d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   imageComponent: {fileID: 0}
   p_index: 0
-  sprites: []
 --- !u!1 &5069892489917954959
 GameObject:
   m_ObjectHideFlags: 0
